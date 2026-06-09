@@ -496,17 +496,14 @@ function preencherFormulario(v) {
   currentFotos = v.fotos ? v.fotos.slice() : [];
   document.getElementById('obs-gleba').value = v.obs || '';
   document.getElementById('rec-gleba').value = v.rec || '';
-  // Set radio buttons
   document.querySelectorAll('.rb').forEach(function(b){ b.className='rb'; });
-  ITEMS.forEach(function(item){
-    if(ratings[item.key]){
-      var btns = document.querySelectorAll('[onclick*="setR(this,\''+item.key+'\',"]');
-      btns.forEach(function(b){
-        if(b.getAttribute('onclick').indexOf("'"+ratings[item.key]+"'")>=0){
-          b.className='rb sel-'+ratings[item.key];
-        }
-      });
-    }
+  document.querySelectorAll('.rb').forEach(function(b){
+    var oc = b.getAttribute('onclick') || '';
+    ITEMS.forEach(function(item){
+      if(ratings[item.key] && oc.indexOf(item.key) >= 0 && oc.indexOf(ratings[item.key]) >= 0){
+        b.className = 'rb sel-' + ratings[item.key];
+      }
+    });
   });
   renderFotoWrap();
 }
