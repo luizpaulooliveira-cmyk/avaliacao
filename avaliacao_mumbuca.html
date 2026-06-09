@@ -32,7 +32,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,"Helvetica 
 .chip-wrap{display:flex;flex-wrap:wrap;gap:6px}
 .chip{padding:7px 14px;font-size:13px;border-radius:20px;border:1px solid var(--border);background:#fafaf8;color:var(--text2);cursor:pointer;font-family:inherit}
 .chip.sel{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:600}
-.chip.done{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);opacity:.6;cursor:default}
+.chip.done{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);opacity:.8;cursor:pointer}
 .avl-group-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:12px 0 6px;border-top:.5px solid var(--border);margin-top:4px}
 .avl-group-label:first-of-type{border-top:none;padding-top:4px}
 .avl-row{display:flex;align-items:center;padding:9px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
@@ -112,6 +112,9 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,"Helvetica 
   </div>
   <div class="btn-row">
     <button class="btn btn-primary" onclick="goStep(2)" id="btn-prox1" disabled>Avaliar gleba selecionada →</button>
+  </div>
+  <div class="btn-row" style="margin-top:4px">
+    <button class="btn btn-danger" onclick="limparVisita()" style="font-size:13px;padding:10px">🗑 Zerar dados da visita anterior</button>
   </div>
 </div>
 
@@ -210,7 +213,7 @@ var ITEMS = [
   {key:'phoma',      label:'Phoma',            labels:['Baixa','Média','Alta']}
 ];
 
-var ratings = {}, currentFotos = [], visitadas = [], selectedGleba = null;
+var ratings = {}, currentFotos = [], visitadas = [], selectedGleba = null, editandoGleba = null;
 
 function makeFotoBtn() {
   var a = document.createElement('div');
@@ -220,16 +223,7 @@ function makeFotoBtn() {
   return a;
 }
 
-try {
-  var sv = localStorage.getItem('mmb_v');
-  if (sv) {
-    var pd = JSON.parse(sv);
-    var sd = localStorage.getItem('mmb_d');
-    var td = new Date().toISOString().split('T')[0];
-    if (sd === td) { visitadas = pd; }
-    else { localStorage.removeItem('mmb_v'); localStorage.removeItem('mmb_d'); }
-  }
-} catch(e) {}
+try { var sv = localStorage.getItem('mmb_v'); if (sv) { visitadas = JSON.parse(sv); } } catch(e) {}
 
 document.getElementById('prox-visita').value = new Date(Date.now()+30*24*60*60*1000).toISOString().split('T')[0];
 document.getElementById('foto-wrap').appendChild(makeFotoBtn());
@@ -317,7 +311,7 @@ function openFotoModal(src) {
 }
 
 function salvarGleba() {
-  visitadas.push({
+  var novaAvaliacao = {
     gleba: selectedGleba.gleba,
     propriedade: selectedGleba.propriedade,
     variedade: selectedGleba.variedade,
@@ -331,7 +325,12 @@ function salvarGleba() {
     rec: document.getElementById('rec-gleba').value,
     fotos: currentFotos.slice(),
     status: statusGeral(ratings)
-  });
+  };
+  if (editandoGleba) {
+    var idx = visitadas.findIndex(function(v){return v.gleba===novaAvaliacao.gleba});
+    if (idx >= 0) { visitadas[idx] = novaAvaliacao; } else { visitadas.push(novaAvaliacao); }
+  } else { visitadas.push(novaAvaliacao); }
+  editandoGleba = null;
   autoSave();
   resetForm();
   renderConsolidado();
@@ -480,12 +479,33 @@ function limparVisita() {
 function adicionarGleba() { onPropChange(); goStep(1); }
 
 function goStep(n) {
-  if (n === 2 && selectedGleba) renderInfoGrid(selectedGleba);
+  if (n === 2 && selectedGleba) { renderInfoGrid(selectedGleba); if (editandoGleba) { preencherFormulario(editandoGleba); } else { resetForm(); renderInfoGrid(selectedGleba); } }
   [1,2,3].forEach(function(i){ document.getElementById('step'+i).classList.toggle('active', i===n); });
   var subs = ['Fazenda Mumbuca', 'Avaliação · '+(selectedGleba?selectedGleba.gleba:''), 'Resumo · '+new Date().toLocaleDateString('pt-BR')];
   document.getElementById('header-sub').textContent = subs[n-1];
   document.getElementById('progress').style.width = (n*33.3)+'%';
   window.scrollTo(0,0);
+}
+
+
+function preencherFormulario(v) {
+  ratings = Object.assign({}, v.ratings);
+  currentFotos = v.fotos ? v.fotos.slice() : [];
+  document.getElementById('obs-gleba').value = v.obs || '';
+  document.getElementById('rec-gleba').value = v.rec || '';
+  // Set radio buttons
+  document.querySelectorAll('.rb').forEach(function(b){ b.className='rb'; });
+  ITEMS.forEach(function(item){
+    if(ratings[item.key]){
+      var btns = document.querySelectorAll('[onclick*="setR(this,\''+item.key+'\',"]');
+      btns.forEach(function(b){
+        if(b.getAttribute('onclick').indexOf("'"+ratings[item.key]+"'")>=0){
+          b.className='rb sel-'+ratings[item.key];
+        }
+      });
+    }
+  });
+  renderFotoWrap();
 }
 
 function showToast(msg) {
