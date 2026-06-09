@@ -147,8 +147,8 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
     <div class="avl-row"><span class="avl-label">Triação química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'triacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'triacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'triacao','critico')">Atrasada</button></div></div>
     <div class="avl-row"><span class="avl-label">Capina química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinaquim','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinaquim','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinaquim','critico')">Atrasada</button></div></div>
     <div class="avl-row"><span class="avl-label">Capina mecânica</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinamec','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinamec','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinamec','critico')">Atrasada</button></div></div>
-    <div class="avl-group-label">Pragas</div>
     <div class="avl-row"><span class="avl-label">Catação de pragas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'catacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'catacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'catacao','critico')">Atrasada</button></div></div>
+    <div class="avl-group-label">Pragas</div>
     <div class="avl-row"><span class="avl-label">Broca</span><div class="avl-btns"><button class="rb" onclick="setR(this,'broca','ok')">Baixa</button><button class="rb" onclick="setR(this,'broca','atencao')">Média</button><button class="rb" onclick="setR(this,'broca','critico')">Alta</button></div></div>
     <div class="avl-row"><span class="avl-label">Bicho mineiro</span><div class="avl-btns"><button class="rb" onclick="setR(this,'bichomineiro','ok')">Baixo</button><button class="rb" onclick="setR(this,'bichomineiro','atencao')">Médio</button><button class="rb" onclick="setR(this,'bichomineiro','critico')">Alto</button></div></div>
     <div class="avl-row"><span class="avl-label">Mariposas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'mariposas','ok')">Baixo</button><button class="rb" onclick="setR(this,'mariposas','atencao')">Médio</button><button class="rb" onclick="setR(this,'mariposas','critico')">Alto</button></div></div>
@@ -223,7 +223,7 @@ var ITEMS=[
   {key:'triacao',label:'Triação química',labels:['Em dia','Parcial','Atrasada'],grupo:'Manejo de mato'},
   {key:'capinaquim',label:'Capina química',labels:['Em dia','Parcial','Atrasada'],grupo:'Manejo de mato'},
   {key:'capinamec',label:'Capina mecânica',labels:['Em dia','Parcial','Atrasada'],grupo:'Manejo de mato'},
-  {key:'catacao',label:'Catação de pragas',labels:['Em dia','Parcial','Atrasada'],grupo:'Pragas'},
+  {key:'catacao',label:'Catação de pragas',labels:['Em dia','Parcial','Atrasada'],grupo:'Manejo de mato'},
   {key:'broca',label:'Broca',labels:['Baixa','Média','Alta'],grupo:'Pragas'},
   {key:'bichomineiro',label:'Bicho mineiro',labels:['Baixo','Médio','Alto'],grupo:'Pragas'},
   {key:'mariposas',label:'Mariposas',labels:['Baixo','Médio','Alto'],grupo:'Pragas'},
@@ -258,7 +258,7 @@ function autoSave(){try{var ts=visitadas.map(function(v){return Object.assign({}
 function salvarVisitaLocal(){autoSave();showToast('Visita salva no dispositivo ✓');}
 function limparVisita(){if(confirm('Iniciar nova visita? Os dados serão perdidos.')){visitadas=[];localStorage.removeItem('smb_visitadas');localStorage.removeItem('smb_date');resetForm();document.getElementById('sel-prop').value='';document.getElementById('field-glebas').style.display='none';document.getElementById('visited-section').style.display='none';document.getElementById('visit-badges').innerHTML='';goStep(1);showToast('Nova visita iniciada');}}
 function adicionarGleba(){onPropChange();goStep(1);}
-function goStep(n){if(n===2&&selectedGleba){renderInfoGrid(selectedGleba);if(editandoGleba){preencherFormulario(editandoGleba);}else{resetForm();renderInfoGrid(selectedGleba);}}[1,2,3].forEach(function(i){document.getElementById('step'+i).classList.toggle('active',i===n);});var subs=['Fazenda Samambaia','Avaliação · '+(selectedGleba?selectedGleba.gleba:''),'Resumo · '+new Date().toLocaleDateString('pt-BR')];document.getElementById('header-sub').textContent=subs[n-1];document.getElementById('progress').style.width=(n*33.3)+'%';window.scrollTo(0,0);}
+function goStep(n){if(n===2&&selectedGleba){renderInfoGrid(selectedGleba);if(editandoGleba){preencherFormulario(editandoGleba);}}[1,2,3].forEach(function(i){document.getElementById('step'+i).classList.toggle('active',i===n);});var subs=['Fazenda Samambaia','Avaliação · '+(selectedGleba?selectedGleba.gleba:''),'Resumo · '+new Date().toLocaleDateString('pt-BR')];document.getElementById('header-sub').textContent=subs[n-1];document.getElementById('progress').style.width=(n*33.3)+'%';window.scrollTo(0,0);}
 
 function preencherFormulario(v) {
   ratings = Object.assign({}, v.ratings);
