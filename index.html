@@ -34,7 +34,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
 .chip-wrap{display:flex;flex-wrap:wrap;gap:6px}
 .chip{padding:7px 14px;font-size:13px;border-radius:20px;border:1px solid var(--border);background:#fafaf8;color:var(--text2);cursor:pointer;transition:all .12s;font-family:inherit}
 .chip.sel{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:600}
-.chip.done{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);opacity:.6;cursor:default}
+.chip.done{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);opacity:.8;cursor:pointer}
 .avl-group-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:12px 0 6px;border-top:.5px solid var(--border);margin-top:4px}
 .avl-group-label:first-of-type{border-top:none;padding-top:4px}
 .avl-row{display:flex;align-items:center;padding:9px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
@@ -128,6 +128,9 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
   </div>
   <div class="btn-row">
     <button class="btn btn-primary" onclick="goStep(2)" id="btn-prox1" disabled>Avaliar gleba selecionada →</button>
+  </div>
+  <div class="btn-row" style="margin-top:4px">
+    <button class="btn btn-danger" onclick="limparVisita()" style="font-size:13px;padding:10px">🗑 Zerar dados da visita anterior</button>
   </div>
 </div>
 
@@ -237,13 +240,13 @@ if(visitadas.length){renderConsolidado();updateVisitBadges();}
 
 function statusGeral(r){if(ITEMS.some(function(i){return r[i.key]==='critico'}))return'critico';if(ITEMS.some(function(i){return r[i.key]==='atencao'}))return'atencao';return'ok';}
 function badgeClass(s){return s==='critico'?'badge-critico':s==='atencao'?'badge-atencao':s==='ok'?'badge-ok':'badge-neu';}
-function onPropChange(){var prop=document.getElementById('sel-prop').value;var container=document.getElementById('gleba-list');container.innerHTML='';selectedGleba=null;document.getElementById('btn-prox1').disabled=true;document.getElementById('field-glebas').style.display=prop?'block':'none';if(!prop)return;var vis=visitadas.map(function(v){return v.gleba});GLEBAS.filter(function(g){return g.propriedade===prop}).forEach(function(g){var jav=vis.indexOf(g.gleba)>=0;var chip=document.createElement('button');chip.className='chip'+(jav?' done':'');chip.textContent=g.gleba+(jav?' ✓':'');chip.onclick=function(){if(jav)return;container.querySelectorAll('.chip:not(.done)').forEach(function(c){c.classList.remove('sel')});chip.classList.add('sel');selectedGleba=g;document.getElementById('btn-prox1').disabled=false;};container.appendChild(chip);});}
+function onPropChange(){var prop=document.getElementById('sel-prop').value;var container=document.getElementById('gleba-list');container.innerHTML='';selectedGleba=null;document.getElementById('btn-prox1').disabled=true;document.getElementById('field-glebas').style.display=prop?'block':'none';if(!prop)return;var vis=visitadas.map(function(v){return v.gleba});GLEBAS.filter(function(g){return g.propriedade===prop}).forEach(function(g){var jav=vis.indexOf(g.gleba)>=0;var chip=document.createElement('button');chip.className='chip'+(jav?' done':'');chip.textContent=g.gleba+(jav?' ✓':'');chip.onclick=function(){container.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel')});chip.classList.add('sel');selectedGleba=g;document.getElementById('btn-prox1').disabled=false;if(jav){var ex=visitadas.filter(function(v){return v.gleba===g.gleba})[0];if(ex){editandoGleba=ex;}}else{editandoGleba=null;}};container.appendChild(chip);});}
 function renderInfoGrid(g){var items=[{lbl:'Variedade',val:g.variedade},{lbl:'Área',val:g.ha+' ha'},{lbl:'Plantio',val:g.plantio+' · '+g.idade+' anos'},{lbl:'Espaçamento',val:g.espacamento},{lbl:'Fruto',val:g.fruto},{lbl:'Porte / Maturação',val:g.porte+' / '+g.maturacao}];document.getElementById('info-grid').innerHTML=items.map(function(i){return'<div class="info-item"><div class="lbl">'+i.lbl+'</div><div class="val">'+i.val+'</div></div>';}).join('');}
 function setR(btn,key,val){ratings[key]=val;btn.parentNode.querySelectorAll('.rb').forEach(function(b){b.className='rb'});btn.className='rb sel-'+val;}
 function addFotos(input){var files=Array.from(input.files);files.forEach(function(file){var reader=new FileReader();reader.onload=function(e){currentFotos.push(e.target.result);renderFotoWrap();};reader.readAsDataURL(file);});input.value='';}
 function renderFotoWrap(){var wrap=document.getElementById('foto-wrap');wrap.innerHTML='';currentFotos.forEach(function(src){var img=document.createElement('img');img.className='foto-thumb';img.src=src;img.onclick=function(){openFotoModal(src);};wrap.appendChild(img);});var a=document.createElement('div');a.className='foto-add';a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Foto';a.onclick=function(){document.getElementById('foto-input').click();};wrap.appendChild(a);}
 function openFotoModal(src){document.getElementById('foto-modal-img').src=src;document.getElementById('foto-modal').classList.add('open');}
-function salvarGleba(){visitadas.push({gleba:selectedGleba.gleba,propriedade:selectedGleba.propriedade,variedade:selectedGleba.variedade,ha:selectedGleba.ha,plantio:selectedGleba.plantio,idade:selectedGleba.idade,porte:selectedGleba.porte,maturacao:selectedGleba.maturacao,ratings:Object.assign({},ratings),obs:document.getElementById('obs-gleba').value,rec:document.getElementById('rec-gleba').value,fotos:currentFotos.slice(),status:statusGeral(ratings),hora:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})});autoSave();resetForm();renderConsolidado();updateVisitBadges();goStep(3);showToast('Gleba salva! ✓');}
+function salvarGleba(){var novaAvaliacao={gleba:selectedGleba.gleba,propriedade:selectedGleba.propriedade,variedade:selectedGleba.variedade,ha:selectedGleba.ha,plantio:selectedGleba.plantio,idade:selectedGleba.idade,porte:selectedGleba.porte,maturacao:selectedGleba.maturacao,ratings:Object.assign({},ratings),obs:document.getElementById('obs-gleba').value,rec:document.getElementById('rec-gleba').value,fotos:currentFotos.slice(),status:statusGeral(ratings),hora:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})};editandoGleba=null;autoSave();resetForm();renderConsolidado();updateVisitBadges();goStep(3);showToast('Gleba salva! ✓');}
 function resetForm(){ratings={};currentFotos=[];document.querySelectorAll('.rb').forEach(function(b){b.className='rb'});document.getElementById('obs-gleba').value='';document.getElementById('rec-gleba').value='';document.getElementById('foto-wrap').innerHTML='<div class="foto-add" onclick="document.getElementById(\'foto-input\').click()"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Foto</div>';selectedGleba=null;document.getElementById('btn-prox1').disabled=true;}
 function updateVisitBadges(){document.getElementById('visit-badges').innerHTML=visitadas.map(function(v){return'<span class="badge '+badgeClass(v.status)+'">'+v.gleba+'</span>';}).join('');}
 function renderConsolidado(){var totalHa=visitadas.reduce(function(s,v){return s+parseFloat(v.ha||0)},0);var crit=visitadas.filter(function(v){return v.status==='critico'}).length;var atenc=visitadas.filter(function(v){return v.status==='atencao'}).length;var ok=visitadas.filter(function(v){return v.status==='ok'}).length;document.getElementById('metric-cards').innerHTML='<div class="metric-card"><div class="val">'+visitadas.length+'</div><div class="lbl">Glebas avaliadas</div></div>'+'<div class="metric-card"><div class="val">'+totalHa.toFixed(1)+'</div><div class="lbl">Hectares</div></div>'+'<div class="metric-card"><div class="val" style="color:var(--red-mid)">'+crit+'</div><div class="lbl">Críticas</div></div>'+'<div class="metric-card"><div class="val">'+ok+'/'+atenc+'/'+crit+'</div><div class="lbl">OK / atenção / crítico</div></div>';document.getElementById('gleba-cards').innerHTML=visitadas.map(function(v){var badges=ITEMS.filter(function(i){return v.ratings[i.key]}).map(function(i){var val=v.ratings[i.key];var cls=val==='ok'?'badge-ok':val==='atencao'?'badge-atencao':'badge-critico';var lbl=val==='ok'?i.labels[0]:val==='atencao'?i.labels[1]:i.labels[2];return'<span class="mini-badge '+cls+'">'+i.label+': '+lbl+'</span>';}).join('');var fotosHtml=v.fotos&&v.fotos.length?'<div class="foto-preview-row">'+v.fotos.map(function(src){return'<img class="foto-preview-thumb" src="'+src+'" onclick="openFotoModal(\''+src+'\')">';}).join('')+'</div>':'';return'<div class="gleba-card">'+'<div class="gleba-card-head"><span class="gleba-card-name">'+v.gleba+'</span><span class="badge '+badgeClass(v.status)+'">'+(v.status==='ok'?'OK':v.status==='atencao'?'Atenção':'Crítico')+'</span></div>'+'<div class="gleba-card-sub">'+v.variedade+' · '+v.ha+' ha · '+v.idade+' anos</div>'+'<div>'+badges+'</div>'+(v.obs?'<div style="font-size:12px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:.5px solid var(--border)">'+v.obs+'</div>':'')+(v.rec?'<div style="font-size:12px;color:var(--text2);margin-top:4px"><b>Rec:</b> '+v.rec+'</div>':'')+fotosHtml+'</div>';}).join('');document.getElementById('visited-list').innerHTML=visitadas.map(function(v){return'<span class="badge '+badgeClass(v.status)+'" style="margin:3px 3px 0 0;display:inline-block">'+v.gleba+'</span>';}).join('');document.getElementById('visited-section').style.display=visitadas.length?'':'none';updateExportPreview();}
@@ -255,7 +258,28 @@ function autoSave(){try{var ts=visitadas.map(function(v){return Object.assign({}
 function salvarVisitaLocal(){autoSave();showToast('Visita salva no dispositivo ✓');}
 function limparVisita(){if(confirm('Iniciar nova visita? Os dados serão perdidos.')){visitadas=[];localStorage.removeItem('smb_visitadas');localStorage.removeItem('smb_date');resetForm();document.getElementById('sel-prop').value='';document.getElementById('field-glebas').style.display='none';document.getElementById('visited-section').style.display='none';document.getElementById('visit-badges').innerHTML='';goStep(1);showToast('Nova visita iniciada');}}
 function adicionarGleba(){onPropChange();goStep(1);}
-function goStep(n){if(n===2&&selectedGleba)renderInfoGrid(selectedGleba);[1,2,3].forEach(function(i){document.getElementById('step'+i).classList.toggle('active',i===n);});var subs=['Fazenda Samambaia','Avaliação · '+(selectedGleba?selectedGleba.gleba:''),'Resumo · '+new Date().toLocaleDateString('pt-BR')];document.getElementById('header-sub').textContent=subs[n-1];document.getElementById('progress').style.width=(n*33.3)+'%';window.scrollTo(0,0);}
+function goStep(n){if(n===2&&selectedGleba){renderInfoGrid(selectedGleba);if(editandoGleba){preencherFormulario(editandoGleba);}else{resetForm();renderInfoGrid(selectedGleba);}}[1,2,3].forEach(function(i){document.getElementById('step'+i).classList.toggle('active',i===n);});var subs=['Fazenda Samambaia','Avaliação · '+(selectedGleba?selectedGleba.gleba:''),'Resumo · '+new Date().toLocaleDateString('pt-BR')];document.getElementById('header-sub').textContent=subs[n-1];document.getElementById('progress').style.width=(n*33.3)+'%';window.scrollTo(0,0);}
+
+function preencherFormulario(v) {
+  ratings = Object.assign({}, v.ratings);
+  currentFotos = v.fotos ? v.fotos.slice() : [];
+  document.getElementById('obs-gleba').value = v.obs || '';
+  document.getElementById('rec-gleba').value = v.rec || '';
+  // Set radio buttons
+  document.querySelectorAll('.rb').forEach(function(b){ b.className='rb'; });
+  ITEMS.forEach(function(item){
+    if(ratings[item.key]){
+      var btns = document.querySelectorAll('[onclick*="setR(this,\''+item.key+'\',"]');
+      btns.forEach(function(b){
+        if(b.getAttribute('onclick').indexOf("'"+ratings[item.key]+"'")>=0){
+          b.className='rb sel-'+ratings[item.key];
+        }
+      });
+    }
+  });
+  renderFotoWrap();
+}
+
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);}
 </script>
 </body>
