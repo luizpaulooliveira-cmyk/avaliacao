@@ -234,7 +234,7 @@ var ITEMS=[
 ];
 
 var ratings={};var currentFotos=[];var visitadas=[];var selectedGleba=null;
-try{var saved=localStorage.getItem('smb_visitadas');if(saved){var p=JSON.parse(saved);var sd=localStorage.getItem('smb_date');var today=new Date().toISOString().split('T')[0];if(sd===today){visitadas=p;}else{localStorage.removeItem('smb_visitadas');localStorage.removeItem('smb_date');}}}catch(e){}
+try{var saved=localStorage.getItem('smb_visitadas');if(saved){var p=JSON.parse(saved);var sd=localStorage.getItem('smb_date');var today=new Date().toISOString().split('T')[0];if(sd===today){visitadas=p;}else{localStorage.removeItem('smb_visitadas');}}}catch(e){}
 document.getElementById('prox-visita').value=new Date(Date.now()+30*24*60*60*1000).toISOString().split('T')[0];
 if(visitadas.length){renderConsolidado();updateVisitBadges();}
 
@@ -254,10 +254,10 @@ function buildExportText(){var prop=visitadas.length?visitadas[0].propriedade:''
 function updateExportPreview(){if(visitadas.length){var txt=buildExportText();document.getElementById('export-preview').textContent=txt.substring(0,600)+(txt.length>600?'\n...':'');}}
 function copiarTexto(){var txt=buildExportText();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){showToast('Copiado! Cole no Claude ✓');}).catch(function(){fallbackCopy(txt);});}else{fallbackCopy(txt);}}
 function fallbackCopy(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');showToast('Copiado! Cole no Claude ✓');}catch(e){showToast('Selecione o texto manualmente');}document.body.removeChild(ta);}
-function autoSave(){try{var ts=visitadas.map(function(v){return Object.assign({},v,{fotos:[]});});localStorage.setItem('smb_visitadas',JSON.stringify(ts));localStorage.setItem('smb_date',new Date().toISOString().split('T')[0]);}catch(e){}}
+function autoSave(){try{var ts=visitadas.map(function(v){return Object.assign({},v,{fotos:[]});});localStorage.setItem('smb_visitadas',JSON.stringify(ts));}catch(e){}}
 function salvarVisitaLocal(){autoSave();showToast('Visita salva no dispositivo ✓');}
-function limparVisita(){if(confirm('Iniciar nova visita? Os dados serão perdidos.')){visitadas=[];localStorage.removeItem('smb_visitadas');localStorage.removeItem('smb_date');resetForm();document.getElementById('sel-prop').value='';document.getElementById('field-glebas').style.display='none';document.getElementById('visited-section').style.display='none';document.getElementById('visit-badges').innerHTML='';goStep(1);showToast('Nova visita iniciada');}}
-function adicionarGleba(){onPropChange();goStep(1);}
+function limparVisita(){if(confirm('Iniciar nova visita? Os dados serão perdidos.')){visitadas=[];localStorage.removeItem('smb_visitadas');resetForm();document.getElementById('sel-prop').value='';document.getElementById('field-glebas').style.display='none';document.getElementById('visited-section').style.display='none';document.getElementById('visit-badges').innerHTML='';goStep(1);showToast('Nova visita iniciada');}}
+function adicionarGleba(){var p=document.getElementById("sel-prop").value;if(p){document.getElementById("sel-prop").value=p;onPropChange();}goStep(1);}
 function goStep(n){if(n===2&&selectedGleba){renderInfoGrid(selectedGleba);if(editandoGleba){preencherFormulario(editandoGleba);}}[1,2,3].forEach(function(i){document.getElementById('step'+i).classList.toggle('active',i===n);});var subs=['Fazenda Samambaia','Avaliação · '+(selectedGleba?selectedGleba.gleba:''),'Resumo · '+new Date().toLocaleDateString('pt-BR')];document.getElementById('header-sub').textContent=subs[n-1];document.getElementById('progress').style.width=(n*33.3)+'%';window.scrollTo(0,0);}
 
 function preencherFormulario(v) {
