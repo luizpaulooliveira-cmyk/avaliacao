@@ -240,7 +240,7 @@ function save() {
 }
 
 function zerarVisita() {
-  if (!confirm('Apagar todos os dados desta visita?')) return;
+  
   visitadas = [];
   sel = null; ratings = {}; fotos = []; editing = null;
   localStorage.removeItem(SK);
