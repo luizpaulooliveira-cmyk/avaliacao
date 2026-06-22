@@ -2,295 +2,343 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Mumbuca">
-<title>Avaliação · Mumbuca</title>
+<meta name="apple-mobile-web-app-title" content="Três Barras">
+<title>Avaliação · Três Barras</title>
 <style>
-:root{--green-dark:#085041;--green-mid:#0F6E56;--green-main:#1D9E75;--green-bg:#E1F5EE;--amber-dark:#633806;--amber-mid:#854F0B;--amber-bg:#FAEEDA;--red-dark:#791F1F;--red-mid:#A32D2D;--red-bg:#FCEBEB;--bg:#f5f4f0;--card:#ffffff;--border:rgba(0,0,0,0.10);--text:#1a1a18;--text2:#5a5a56;--text3:#9a9a94;--radius:12px;--radius-sm:8px}
+:root{--gd:#085041;--gm:#0F6E56;--gg:#1D9E75;--gb:#E1F5EE;--ad:#633806;--am:#854F0B;--ab:#FAEEDA;--rd:#791F1F;--rm:#A32D2D;--rb:#FCEBEB;--bg:#f5f4f0;--card:#fff;--bdr:rgba(0,0,0,.1);--tx:#1a1a18;--tx2:#5a5a56;--tx3:#9a9a94;--r:12px;--rs:8px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);font-family:-apple-system,"Helvetica Neue",sans-serif;color:var(--text)}
+html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica Neue',sans-serif;color:var(--tx)}
 .app{max-width:480px;margin:0 auto;padding:0 0 80px;min-height:100vh}
-.header{background:var(--green-dark);color:#fff;padding:16px 16px 14px;position:sticky;top:0;z-index:100}
-.header-row{display:flex;align-items:center;justify-content:space-between}
-.header h1{font-size:16px;font-weight:600}
-.header-sub{font-size:12px;opacity:.65;margin-top:2px}
-.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block}
-.badge-ok{background:var(--green-bg);color:var(--green-dark)}
-.badge-atencao{background:var(--amber-bg);color:var(--amber-dark)}
-.badge-critico{background:var(--red-bg);color:var(--red-dark)}
-.badge-neu{background:#eee;color:#888}
-.progress-wrap{background:rgba(255,255,255,0.2);height:3px;margin-top:12px;border-radius:2px;overflow:hidden}
-.progress-bar{height:3px;background:#fff;border-radius:2px;transition:width .3s}
-.section{background:var(--card);border-radius:var(--radius);margin:12px;padding:14px 16px;border:.5px solid var(--border)}
-.section-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.hdr{background:var(--gd);color:#fff;padding:16px 16px 14px;position:sticky;top:0;z-index:100}
+.hdr-row{display:flex;align-items:center;justify-content:space-between}
+.hdr h1{font-size:16px;font-weight:600}
+.hdr-sub{font-size:12px;opacity:.65;margin-top:2px}
+.prog-wrap{background:rgba(255,255,255,.2);height:3px;margin-top:12px;border-radius:2px;overflow:hidden}
+.prog{height:3px;background:#fff;border-radius:2px;transition:width .3s}
+.sec{background:var(--card);border-radius:var(--r);margin:12px;padding:14px 16px;border:.5px solid var(--bdr)}
+.sec-title{font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
 .field{margin-bottom:12px}.field:last-child{margin-bottom:0}
-.field label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:500}
-.field select,.field input[type=date],.field textarea{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fafaf8;color:var(--text);appearance:none;-webkit-appearance:none;outline:none;font-family:inherit}
+.field label{display:block;font-size:12px;color:var(--tx2);margin-bottom:5px;font-weight:500}
+.field select,.field input[type=date],.field textarea{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--bdr);border-radius:var(--rs);background:#fafaf8;color:var(--tx);appearance:none;-webkit-appearance:none;outline:none;font-family:inherit}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .field textarea{resize:none;height:72px;font-size:14px;line-height:1.5}
 .chip-wrap{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:7px 14px;font-size:13px;border-radius:20px;border:1px solid var(--border);background:#fafaf8;color:var(--text2);cursor:pointer;font-family:inherit}
-.chip.sel{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:600}
-.chip.done{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);opacity:.8;cursor:pointer}
-.avl-group-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:12px 0 6px;border-top:.5px solid var(--border);margin-top:4px}
-.avl-group-label:first-of-type{border-top:none;padding-top:4px}
+.chip{padding:7px 14px;font-size:13px;border-radius:20px;border:1px solid var(--bdr);background:#fafaf8;color:var(--tx2);cursor:pointer;font-family:inherit;transition:background .1s}
+.chip.sel{background:var(--gb);border-color:var(--gm);color:var(--gd);font-weight:600}
+.chip.done{background:var(--gb);border-color:var(--gm);color:var(--gd);opacity:.75}
+.grp{font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;padding:12px 0 6px;border-top:.5px solid var(--bdr);margin-top:4px}
+.grp:first-of-type{border-top:none;padding-top:4px}
 .avl-row{display:flex;align-items:center;padding:9px 0;border-bottom:.5px solid rgba(0,0,0,.05)}
 .avl-row:last-child{border-bottom:none}
 .avl-label{font-size:14px;flex:1;padding-right:8px}
 .avl-btns{display:flex;gap:4px;flex-shrink:0}
-.rb{padding:5px 10px;font-size:12px;border-radius:6px;border:1px solid var(--border);background:#fafaf8;color:var(--text2);cursor:pointer;font-family:inherit;white-space:nowrap}
-.rb.sel-ok{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:600}
-.rb.sel-atencao{background:var(--amber-bg);border-color:var(--amber-mid);color:var(--amber-dark);font-weight:600}
-.rb.sel-critico{background:var(--red-bg);border-color:var(--red-mid);color:var(--red-dark);font-weight:600}
+.rb{padding:5px 10px;font-size:12px;border-radius:6px;border:1px solid var(--bdr);background:#fafaf8;color:var(--tx2);cursor:pointer;font-family:inherit;white-space:nowrap}
+.rb.ok{background:var(--gb);border-color:var(--gm);color:var(--gd);font-weight:600}
+.rb.at{background:var(--ab);border-color:var(--am);color:var(--ad);font-weight:600}
+.rb.cr{background:var(--rb);border-color:var(--rm);color:var(--rd);font-weight:600}
 .foto-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.foto-thumb{width:80px;height:80px;border-radius:var(--radius-sm);object-fit:cover;border:1px solid var(--border);cursor:pointer}
-.foto-add{width:80px;height:80px;border-radius:var(--radius-sm);border:1.5px dashed var(--green-main);background:var(--green-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--green-mid);font-size:11px;gap:4px;font-weight:500}
-.foto-add svg{width:24px;height:24px;stroke:var(--green-mid)}
-.btn{display:block;width:100%;padding:13px;font-size:15px;font-weight:600;border-radius:var(--radius-sm);border:none;cursor:pointer;font-family:inherit;text-align:center;transition:all .12s}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:var(--green-dark);color:#fff}
-.btn-secondary{background:var(--card);border:1px solid var(--border);color:var(--text)}
-.btn-outline{background:transparent;border:1.5px solid var(--green-mid);color:var(--green-mid)}
-.btn-danger{background:var(--red-bg);border:1px solid var(--red-mid);color:var(--red-dark)}
+.foto-thumb{width:80px;height:80px;border-radius:var(--rs);object-fit:cover;border:1px solid var(--bdr);cursor:pointer}
+.foto-add{width:80px;height:80px;border-radius:var(--rs);border:1.5px dashed var(--gg);background:var(--gb);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--gm);font-size:11px;gap:4px;font-weight:500}
+.foto-add svg{width:24px;height:24px;stroke:var(--gm)}
+.btn{display:block;width:100%;padding:13px;font-size:15px;font-weight:600;border-radius:var(--rs);border:none;cursor:pointer;font-family:inherit;text-align:center}
+.btn:active{opacity:.85}
+.btn-p{background:var(--gd);color:#fff}
+.btn-s{background:var(--card);border:1px solid var(--bdr);color:var(--tx)}
+.btn-o{background:transparent;border:1.5px solid var(--gm);color:var(--gm)}
+.btn-d{background:var(--rb);border:1px solid var(--rm);color:var(--rd)}
 .btn-row{display:flex;gap:8px;margin:12px}
 .btn-row .btn{flex:1}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.info-item{background:#fafaf8;border-radius:var(--radius-sm);padding:8px 10px;border:.5px solid var(--border)}
-.info-item .lbl{font-size:10px;color:var(--text3);margin-bottom:2px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.info-item{background:#fafaf8;border-radius:var(--rs);padding:8px 10px;border:.5px solid var(--bdr)}
+.info-item .lbl{font-size:10px;color:var(--tx3);margin-bottom:2px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 .info-item .val{font-size:13px;font-weight:600}
-.gleba-card{border:.5px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;background:#fafaf8}
-.gleba-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.gleba-card-name{font-size:14px;font-weight:600}
-.gleba-card-sub{font-size:11px;color:var(--text3);margin-bottom:6px}
-.mini-badge{font-size:11px;padding:2px 7px;border-radius:20px;display:inline-block;margin:2px 2px 0 0;font-weight:500}
-.foto-preview-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
-.foto-preview-thumb{width:56px;height:56px;border-radius:6px;object-fit:cover;border:1px solid var(--border)}
-.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.metric-card{background:#fafaf8;border-radius:var(--radius-sm);padding:10px 12px;border:.5px solid var(--border)}
-.metric-card .val{font-size:22px;font-weight:700}
-.metric-card .lbl{font-size:11px;color:var(--text3);margin-top:1px}
-.export-box{background:#1a1a18;border-radius:var(--radius-sm);padding:14px;margin-top:10px}
-.export-box pre{font-size:11px;color:#c8c8c0;white-space:pre-wrap;word-break:break-word;font-family:"Menlo",monospace;max-height:180px;overflow-y:auto}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-dark);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-weight:500;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+.gc{border:.5px solid var(--bdr);border-radius:var(--rs);padding:12px;margin-bottom:8px;background:#fafaf8}
+.gc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.gc-name{font-size:14px;font-weight:600}
+.gc-sub{font-size:11px;color:var(--tx3);margin-bottom:6px}
+.mb{font-size:11px;padding:2px 7px;border-radius:20px;display:inline-block;margin:2px 2px 0 0;font-weight:500}
+.fp-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.fp-thumb{width:56px;height:56px;border-radius:6px;object-fit:cover;border:1px solid var(--bdr)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.mc{background:#fafaf8;border-radius:var(--rs);padding:10px 12px;border:.5px solid var(--bdr)}
+.mc .val{font-size:22px;font-weight:700}
+.mc .lbl{font-size:11px;color:var(--tx3);margin-top:1px}
+.exp-box{background:#1a1a18;border-radius:var(--rs);padding:14px;margin-top:10px}
+.exp-box pre{font-size:11px;color:#c8c8c0;white-space:pre-wrap;word-break:break-word;font-family:Menlo,monospace;max-height:180px;overflow-y:auto}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--gd);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-weight:500;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1}
-.foto-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center}
-.foto-modal.open{display:flex}
-.foto-modal img{max-width:90vw;max-height:80vh;border-radius:8px}
-.foto-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-#step1,#step2,#step3{display:none}
-#step1.active,#step2.active,#step3.active{display:block}
+.fmodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center}
+.fmodal.open{display:flex}
+.fmodal img{max-width:90vw;max-height:80vh;border-radius:8px}
+.fmodal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block}
+.bok{background:var(--gb);color:var(--gd)}
+.bat{background:var(--ab);color:var(--ad)}
+.bcr{background:var(--rb);color:var(--rd)}
+.bne{background:#eee;color:#888}
+#s1,#s2,#s3{display:none}
+#s1.on,#s2.on,#s3.on{display:block}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="header">
-  <div class="header-row">
-    <div><h1>Avaliação Agronômica</h1><div class="header-sub" id="header-sub">Fazenda Mumbuca</div></div>
-    <div id="visit-badges" style="display:flex;gap:4px;flex-wrap:wrap;max-width:55%;justify-content:flex-end"></div>
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div><h1>Avaliação Agronômica</h1><div class="hdr-sub" id="hsub">Três Barras / Mato Verde</div></div>
+    <div id="vbadges" style="display:flex;gap:4px;flex-wrap:wrap;max-width:55%;justify-content:flex-end"></div>
   </div>
-  <div class="progress-wrap"><div class="progress-bar" id="progress" style="width:33%"></div></div>
+  <div class="prog-wrap"><div class="prog" id="prog" style="width:33%"></div></div>
 </div>
 
-<div id="step1" class="active">
-  <div class="section" style="margin-top:12px">
-    <div class="section-title">Propriedade</div>
+<div id="s1" class="on">
+  <div class="sec" style="margin-top:12px">
+    <div class="sec-title">Propriedade</div>
     <div class="field">
       <label>Selecione a propriedade</label>
-      <select id="sel-prop" onchange="onPropChange()">
+      <select id="sp" onchange="onProp()">
         <option value="">— Selecione —</option>
-        <option>MUMBUCA</option>
+        <option>Três Barras</option>
+        <option>Mato Verde</option>
       </select>
     </div>
-    <div id="field-glebas" style="display:none">
-      <div class="field"><label>Gleba</label><div class="chip-wrap" id="gleba-list"></div></div>
+    <div id="field-gl" style="display:none">
+      <div class="field"><label>Gleba</label><div class="chip-wrap" id="gl"></div></div>
     </div>
   </div>
-  <div class="section" id="visited-section" style="display:none">
-    <div class="section-title">Glebas já avaliadas</div>
-    <div id="visited-list"></div>
+  <div class="sec" id="vs" style="display:none">
+    <div class="sec-title">Glebas já avaliadas</div>
+    <div id="vlist"></div>
   </div>
   <div class="btn-row">
-    <button class="btn btn-primary" onclick="goStep(2)" id="btn-prox1" disabled>Avaliar gleba selecionada →</button>
+    <button class="btn btn-p" id="btn1" onclick="goStep(2)" disabled>Avaliar gleba selecionada →</button>
   </div>
-  <div class="btn-row" style="margin-top:4px">
-    <button class="btn btn-danger" onclick="limparVisita()" style="font-size:13px;padding:10px">🗑 Zerar dados da visita anterior</button>
+  <div class="btn-row">
+    <button class="btn btn-d" onclick="zerarVisita()" style="font-size:13px;padding:10px">🗑 Zerar dados da visita</button>
   </div>
 </div>
 
-<div id="step2">
-  <div class="section" style="margin-top:12px">
-    <div class="section-title">Dados da gleba</div>
-    <div class="info-grid" id="info-grid"></div>
+<div id="s2">
+  <div class="sec" style="margin-top:12px">
+    <div class="sec-title">Dados da gleba</div>
+    <div class="info-grid" id="infogrid"></div>
   </div>
-  <div class="section">
-    <div class="section-title">Avaliação agronômica</div>
-    <div class="avl-group-label">Geral</div>
+  <div class="sec">
+    <div class="sec-title">Avaliação agronômica</div>
+    <div class="grp">Geral</div>
     <div class="avl-row"><span class="avl-label">Vigor</span><div class="avl-btns"><button class="rb" onclick="setR(this,'vigor','ok')">Bom</button><button class="rb" onclick="setR(this,'vigor','atencao')">Regular</button><button class="rb" onclick="setR(this,'vigor','critico')">Ruim</button></div></div>
-    <div class="avl-group-label">Manejo de mato</div>
+    <div class="grp">Manejo de mato</div>
     <div class="avl-row"><span class="avl-label">Triação química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'triacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'triacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'triacao','critico')">Atrasada</button></div></div>
     <div class="avl-row"><span class="avl-label">Capina química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinaquim','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinaquim','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinaquim','critico')">Atrasada</button></div></div>
     <div class="avl-row"><span class="avl-label">Capina mecânica</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinamec','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinamec','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinamec','critico')">Atrasada</button></div></div>
     <div class="avl-row"><span class="avl-label">Catação de pragas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'catacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'catacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'catacao','critico')">Atrasada</button></div></div>
-    <div class="avl-group-label">Pragas</div>
+    <div class="grp">Pragas</div>
     <div class="avl-row"><span class="avl-label">Broca</span><div class="avl-btns"><button class="rb" onclick="setR(this,'broca','ok')">Baixa</button><button class="rb" onclick="setR(this,'broca','atencao')">Média</button><button class="rb" onclick="setR(this,'broca','critico')">Alta</button></div></div>
     <div class="avl-row"><span class="avl-label">Bicho mineiro</span><div class="avl-btns"><button class="rb" onclick="setR(this,'bichomineiro','ok')">Baixo</button><button class="rb" onclick="setR(this,'bichomineiro','atencao')">Médio</button><button class="rb" onclick="setR(this,'bichomineiro','critico')">Alto</button></div></div>
     <div class="avl-row"><span class="avl-label">Mariposas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'mariposas','ok')">Baixo</button><button class="rb" onclick="setR(this,'mariposas','atencao')">Médio</button><button class="rb" onclick="setR(this,'mariposas','critico')">Alto</button></div></div>
     <div class="avl-row"><span class="avl-label">Ácaro vermelho</span><div class="avl-btns"><button class="rb" onclick="setR(this,'acaro','ok')">Baixo</button><button class="rb" onclick="setR(this,'acaro','atencao')">Médio</button><button class="rb" onclick="setR(this,'acaro','critico')">Alto</button></div></div>
-    <div class="avl-group-label">Doenças</div>
+    <div class="grp">Doenças</div>
     <div class="avl-row"><span class="avl-label">Ferrugem</span><div class="avl-btns"><button class="rb" onclick="setR(this,'ferrugem','ok')">Baixa</button><button class="rb" onclick="setR(this,'ferrugem','atencao')">Média</button><button class="rb" onclick="setR(this,'ferrugem','critico')">Alta</button></div></div>
     <div class="avl-row"><span class="avl-label">Cercosporiose</span><div class="avl-btns"><button class="rb" onclick="setR(this,'cercosporiose','ok')">Baixa</button><button class="rb" onclick="setR(this,'cercosporiose','atencao')">Média</button><button class="rb" onclick="setR(this,'cercosporiose','critico')">Alta</button></div></div>
     <div class="avl-row"><span class="avl-label">Phoma</span><div class="avl-btns"><button class="rb" onclick="setR(this,'phoma','ok')">Baixa</button><button class="rb" onclick="setR(this,'phoma','atencao')">Média</button><button class="rb" onclick="setR(this,'phoma','critico')">Alta</button></div></div>
   </div>
-  <div class="section">
-    <div class="section-title">Observações e recomendações</div>
-    <div class="field"><label>Observações de campo</label><textarea id="obs-gleba" placeholder="O que você viu em campo..."></textarea></div>
-    <div class="field"><label>Recomendações técnicas</label><textarea id="rec-gleba" placeholder="Aplicações, manejo, adubação..."></textarea></div>
+  <div class="sec">
+    <div class="sec-title">Observações e recomendações</div>
+    <div class="field"><label>Observações de campo</label><textarea id="obs" placeholder="O que você viu em campo..."></textarea></div>
+    <div class="field"><label>Recomendações técnicas</label><textarea id="rec" placeholder="Aplicações, manejo, adubação..."></textarea></div>
   </div>
-  <div class="section">
-    <div class="section-title">Fotos da gleba</div>
-    <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500">Adicione fotos de campo</div>
+  <div class="sec">
+    <div class="sec-title">Fotos da gleba</div>
     <div class="foto-wrap" id="foto-wrap"></div>
-    <input type="file" id="foto-input" accept="image/*" capture="environment" multiple style="display:none" onchange="addFotos(this)">
+    <input type="file" id="fi" accept="image/*" capture="environment" multiple style="display:none" onchange="addFotos(this)">
   </div>
   <div class="btn-row">
-    <button class="btn btn-secondary" onclick="goStep(1)" style="flex:.5">← Voltar</button>
-    <button class="btn btn-primary" onclick="salvarGleba()">Salvar e continuar →</button>
+    <button class="btn btn-s" onclick="addGleba()" style="flex:.5">← Voltar</button>
+    <button class="btn btn-p" onclick="salvar()">Salvar e continuar →</button>
   </div>
 </div>
 
-<div id="step3">
-  <div class="section" style="margin-top:12px">
-    <div class="section-title">Resumo da visita</div>
-    <div class="metric-grid" id="metric-cards"></div>
-    <div id="gleba-cards"></div>
+<div id="s3">
+  <div class="sec" style="margin-top:12px">
+    <div class="sec-title">Resumo da visita</div>
+    <div class="mg" id="mcards"></div>
+    <div id="gcards"></div>
   </div>
-  <div class="section">
-    <div class="section-title">Planejamento</div>
-    <div class="field"><label>Serviços em andamento</label><textarea id="obs-servicos" placeholder="Status dos serviços..."></textarea></div>
-    <div class="field"><label>Próxima visita</label><input type="date" id="prox-visita"></div>
-    <div class="field"><label>Pontos de atenção</label><textarea id="proxima-obs" placeholder="O que acompanhar..."></textarea></div>
+  <div class="sec">
+    <div class="sec-title">Planejamento</div>
+    <div class="field"><label>Serviços em andamento</label><textarea id="serv" placeholder="Status dos serviços..."></textarea></div>
+    <div class="field"><label>Próxima visita</label><input type="date" id="pv"></div>
+    <div class="field"><label>Pontos de atenção</label><textarea id="pa" placeholder="O que acompanhar..."></textarea></div>
   </div>
-  <div class="section">
-    <div class="section-title">Exportar para o Claude</div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6">Copie o texto e cole no Claude para gerar o relatório técnico.</p>
-    <button class="btn btn-primary" onclick="copiarTexto()">Copiar texto para o Claude</button>
-    <div class="export-box"><pre id="export-preview"></pre></div>
+  <div class="sec">
+    <div class="sec-title">Exportar para o Claude</div>
+    <p style="font-size:13px;color:var(--tx2);margin-bottom:12px;line-height:1.6">Copie o texto e cole no Claude para gerar o relatório técnico.</p>
+    <button class="btn btn-p" onclick="copiar()">Copiar texto para o Claude</button>
+    <div class="exp-box"><pre id="exprev"></pre></div>
   </div>
-  <div class="section">
-    <div class="section-title">Ações</div>
+  <div class="sec">
+    <div class="sec-title">Ações</div>
     <div style="display:flex;flex-direction:column;gap:8px">
-      <button class="btn btn-outline" onclick="adicionarGleba()">+ Avaliar outra gleba</button>
-      <button class="btn btn-secondary" onclick="salvarVisitaLocal()">Salvar visita no dispositivo</button>
-      <button class="btn btn-danger" onclick="limparVisita()">Iniciar nova visita</button>
+      <button class="btn btn-o" onclick="addGleba()">+ Avaliar outra gleba</button>
+      <button class="btn btn-s" onclick="save();toast('Salvo ✓')">Salvar no dispositivo</button>
+      <button class="btn btn-d" onclick="zerarVisita()">🗑 Zerar dados da visita</button>
     </div>
   </div>
 </div>
-</div>
 
+</div>
 <div class="toast" id="toast"></div>
-<div class="foto-modal" id="foto-modal" onclick="this.classList.remove('open')">
-  <button class="foto-modal-close" onclick="document.getElementById('foto-modal').classList.remove('open')">&#x2715;</button>
-  <img id="foto-modal-img" src="" alt="">
+<div class="fmodal" id="fmodal" onclick="this.classList.remove('open')">
+  <button class="fmodal-close" onclick="document.getElementById('fmodal').classList.remove('open')">✕</button>
+  <img id="fmimg" src="" alt="">
 </div>
-
 <script>
 
-var GLEBAS = [{"gleba":"CF 01","propriedade":"MUMBUCA","variedade":"Acaiá Mumbuca","fruto":"Vermelho","porte":"Alto","maturacao":"Normal","plantio":"2000","idade":"26","ha":"9.98","espacamento":"3,60 x 0,70"},{"gleba":"CF 02","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"11.17","espacamento":"3,50 x 0,80"},{"gleba":"CF 02 A","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"5.5","espacamento":"3,50 x 0,80"},{"gleba":"CF 02 B","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"6.3","espacamento":"3,50 x 0,80"},{"gleba":"CF 03","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"9.36","espacamento":"3,50 x 0,60"},{"gleba":"CF 03 B","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"8.28","espacamento":"3,50 x 0,60"},{"gleba":"CF 05","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"18.28","espacamento":"3,50 x 0,60"},{"gleba":"CF 05 C","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"2.63","espacamento":"3,50 x 0,60"},{"gleba":"CF 05 C Poda","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"6.37","espacamento":"3,50 x 0,60"},{"gleba":"CF 06","propriedade":"MUMBUCA","variedade":"Mundo Novo 379-19","fruto":"Vermelho","porte":"Alto","maturacao":"Normal","plantio":"2012","idade":"14","ha":"10.72","espacamento":"3,50 x 0,80"},{"gleba":"CF 08","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 144","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2013","idade":"13","ha":"5.1","espacamento":"3,50 x 0,65"},{"gleba":"CF 09","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 99","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2016","idade":"10","ha":"6.14","espacamento":"3,50 x 0,50"},{"gleba":"CF 10","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 144","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2017","idade":"9","ha":"5.44","espacamento":"3,50 x 0,50"},{"gleba":"CF 11","propriedade":"MUMBUCA","variedade":"Topázio MG 1190","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2017","idade":"9","ha":"6.52","espacamento":"3,50 x 0,50"},{"gleba":"CF 12","propriedade":"MUMBUCA","variedade":"Catuaí Amarelo - IAC 62","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2018","idade":"8","ha":"9.31","espacamento":"3,50 x 0,50"},{"gleba":"CF 13","propriedade":"MUMBUCA","variedade":"Catuaí Amarelo - IAC 62","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2019","idade":"7","ha":"1.61","espacamento":"3,50 x 0,50"}];
-
+var GLEBAS = [{gleba:"C 02",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"6.8",espacamento:"3,60 x 0,60"},{gleba:"C 04",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2020",idade:"5",ha:"10.2",espacamento:"3,60 x 0,60"},{gleba:"C 05",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1996",idade:"29",ha:"2.49",espacamento:"4,00 x 0,50"},{gleba:"C 05 Rubi",propriedade:"Três Barras",variedade:"Rubi",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2006",idade:"19",ha:"2.72",espacamento:"3,65 x 0,65"},{gleba:"C 06 Terra Nova",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1999",idade:"26",ha:"4.24",espacamento:"3,65 x 0,65"},{gleba:"C 06 Terra Velha",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1999",idade:"26",ha:"3.21",espacamento:"3,65 x 0,65"},{gleba:"C 07",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"2001",idade:"24",ha:"4.92",espacamento:"3,65 x 0,65"},{gleba:"C 08",propriedade:"Três Barras",variedade:"Catucaí",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2003",idade:"22",ha:"3.56",espacamento:"3,65 x 0,65"},{gleba:"C 09",propriedade:"Três Barras",variedade:"Catucaí",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2005",idade:"20",ha:"10.73",espacamento:"3,65 x 0,65"},{gleba:"C 14",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"2006",idade:"19",ha:"11.81",espacamento:"3,65 x 0,65"},{gleba:"C 15",propriedade:"Três Barras",variedade:"Catuaí",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2007",idade:"18",ha:"6.01",espacamento:"3,65 x 0,65"},{gleba:"C 16",propriedade:"Três Barras",variedade:"Catuaí / 144",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2013",idade:"12",ha:"6.35",espacamento:"3,65 x 0,60"},{gleba:"C 16 B",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2013",idade:"12",ha:"2.92",espacamento:"3,65 x 0,60"},{gleba:"C 17",propriedade:"Três Barras",variedade:"Catuaí / 99 - C15",fruto:"Vermelho",porte:"Alto",maturacao:"Tardia",plantio:"2015",idade:"10",ha:"9.5",espacamento:"3,65 x 0,60"},{gleba:"C 17 B",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2018",idade:"7",ha:"7.34",espacamento:"3,65 x 0,60"},{gleba:"C 17 A",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2023",idade:"2",ha:"1.77",espacamento:"3,65 x 0,60"},{gleba:"C 17 C",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2023",idade:"2",ha:"1.7",espacamento:"3,65 x 0,60"},{gleba:"C 18",propriedade:"Três Barras",variedade:"Catuaí / 144",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2013",idade:"12",ha:"2.42",espacamento:"3,65 x 0,60"},{gleba:"C 19",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2013",idade:"12",ha:"2.32",espacamento:"3,65 x 0,60"},{gleba:"C 20",propriedade:"Três Barras",variedade:"MGS Turmalina / IPR 98",fruto:"Amarelo",porte:"Baixo",maturacao:"Média",plantio:"2023",idade:"2",ha:"6.69",espacamento:"3,65 x 0,60"},{gleba:"Pereira",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"12.33",espacamento:"3,60 x 0,60"},{gleba:"Quitéria",propriedade:"Mato Verde",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"22.1",espacamento:"3,60 x 0,60"},{gleba:"MV 07",propriedade:"Mato Verde",variedade:"Obatã Amarelo IAC 4739 / Vale Verde",fruto:"Amarelo",porte:"Baixo",maturacao:"Tardia",plantio:"2025",idade:"0",ha:"11.42",espacamento:"3,60 x 0,60"}];
 var ITEMS = [
-  {key:'vigor',      label:'Vigor',           labels:['Bom','Regular','Ruim']},
-  {key:'triacao',    label:'Triação química',  labels:['Em dia','Parcial','Atrasada']},
-  {key:'capinaquim', label:'Capina química',   labels:['Em dia','Parcial','Atrasada']},
-  {key:'capinamec',  label:'Capina mecânica',  labels:['Em dia','Parcial','Atrasada']},
-  {key:'catacao',    label:'Catação de pragas',labels:['Em dia','Parcial','Atrasada']},
-  {key:'broca',      label:'Broca',            labels:['Baixa','Média','Alta']},
-  {key:'bichomineiro',label:'Bicho mineiro',   labels:['Baixo','Médio','Alto']},
-  {key:'mariposas',  label:'Mariposas',        labels:['Baixo','Médio','Alto']},
-  {key:'acaro',      label:'Ácaro vermelho',   labels:['Baixo','Médio','Alto']},
-  {key:'ferrugem',   label:'Ferrugem',         labels:['Baixa','Média','Alta']},
-  {key:'cercosporiose',label:'Cercosporiose',  labels:['Baixa','Média','Alta']},
-  {key:'phoma',      label:'Phoma',            labels:['Baixa','Média','Alta']}
+  {key:'vigor',      label:'Vigor',             labels:['Bom','Regular','Ruim']},
+  {key:'triacao',    label:'Triação química',    labels:['Em dia','Parcial','Atrasada']},
+  {key:'capinaquim', label:'Capina química',     labels:['Em dia','Parcial','Atrasada']},
+  {key:'capinamec',  label:'Capina mecânica',    labels:['Em dia','Parcial','Atrasada']},
+  {key:'catacao',    label:'Catação de pragas',  labels:['Em dia','Parcial','Atrasada']},
+  {key:'broca',      label:'Broca',              labels:['Baixa','Média','Alta']},
+  {key:'bichomineiro',label:'Bicho mineiro',     labels:['Baixo','Médio','Alto']},
+  {key:'mariposas',  label:'Mariposas',          labels:['Baixo','Médio','Alto']},
+  {key:'acaro',      label:'Ácaro vermelho',     labels:['Baixo','Médio','Alto']},
+  {key:'ferrugem',   label:'Ferrugem',           labels:['Baixa','Média','Alta']},
+  {key:'cercosporiose',label:'Cercosporiose',    labels:['Baixa','Média','Alta']},
+  {key:'phoma',      label:'Phoma',              labels:['Baixa','Média','Alta']}
 ];
 
-var ratings = {}, currentFotos = [], visitadas = [], selectedGleba = null, editandoGleba = null;
+var visitadas = [];
+var sel = null;
+var ratings = {};
+var fotos = [];
+var editing = null;
+var SK = 'avl_v';
 
-function makeFotoBtn() {
-  var a = document.createElement('div');
-  a.className = 'foto-add';
-  a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Foto';
-  a.onclick = function(){ document.getElementById('foto-input').click(); };
-  return a;
+// Restore saved data
+try {
+  var d = localStorage.getItem(SK);
+  if (d) visitadas = JSON.parse(d);
+} catch(e) {}
+
+document.getElementById('pv').value = new Date(Date.now()+30*24*60*60*1000).toISOString().split('T')[0];
+if (visitadas.length) { renderSum(); updateBadges(); } goStep(1);
+renderFotoWrap();
+
+function save() {
+  try { localStorage.setItem(SK, JSON.stringify(visitadas.map(function(v){return Object.assign({},v,{fotos:[]});}))); } catch(e) {}
 }
 
-try { var sv = localStorage.getItem('mmb_v'); if (sv) { visitadas = JSON.parse(sv); } } catch(e) {}
-
-document.getElementById('prox-visita').value = new Date(Date.now()+30*24*60*60*1000).toISOString().split('T')[0];
-document.getElementById('foto-wrap').appendChild(makeFotoBtn());
-if (visitadas.length) { renderConsolidado(); updateVisitBadges(); }
-
-function statusGeral(r) {
-  if (ITEMS.some(function(i){ return r[i.key]==='critico'; })) return 'critico';
-  if (ITEMS.some(function(i){ return r[i.key]==='atencao'; })) return 'atencao';
+function zerarVisita() {
+  localStorage.removeItem(SK);
+  location.reload();
+}
+function bc(s) { return s==='critico'?'bcr':s==='atencao'?'bat':s==='ok'?'bok':'bne'; }
+function bl(s) { return s==='critico'?'Crítico':s==='atencao'?'Atenção':'OK'; }
+function rc(v) { return v==='ok'?'ok':v==='atencao'?'at':'cr'; }
+function status(r) {
+  if (ITEMS.some(function(i){return r[i.key]==='critico'})) return 'critico';
+  if (ITEMS.some(function(i){return r[i.key]==='atencao'})) return 'atencao';
   return 'ok';
 }
-function badgeClass(s) {
-  return s==='critico'?'badge-critico':s==='atencao'?'badge-atencao':s==='ok'?'badge-ok':'badge-neu';
-}
 
-function onPropChange() {
-  var prop = document.getElementById('sel-prop').value;
-  var c = document.getElementById('gleba-list');
+function onProp() {
+  var prop = document.getElementById('sp').value;
+  var c = document.getElementById('gl');
   c.innerHTML = '';
-  selectedGleba = null;
-  document.getElementById('btn-prox1').disabled = true;
-  document.getElementById('field-glebas').style.display = prop ? 'block' : 'none';
+  sel = null;
+  document.getElementById('btn1').disabled = true;
+  document.getElementById('field-gl').style.display = prop ? 'block' : 'none';
   if (!prop) return;
-  var vis = visitadas.map(function(v){ return v.gleba; });
-  GLEBAS.filter(function(g){ return g.propriedade === prop; }).forEach(function(g) {
-    var jav = vis.indexOf(g.gleba) >= 0;
+  var done = visitadas.map(function(v){return v.gleba;});
+  GLEBAS.filter(function(g){return g.propriedade===prop;}).forEach(function(g) {
+    var jav = done.indexOf(g.gleba) >= 0;
     var chip = document.createElement('button');
     chip.className = 'chip' + (jav ? ' done' : '');
     chip.textContent = g.gleba + (jav ? ' ✓' : '');
     chip.onclick = function() {
-      c.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('sel'); });
+      c.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});
       chip.classList.add('sel');
-      selectedGleba = g;
-      document.getElementById('btn-prox1').disabled = false;
-      if (jav) {
-        var ex = visitadas.filter(function(v){ return v.gleba === g.gleba; })[0];
-        if (ex) { editandoGleba = ex; }
-      } else { editandoGleba = null; }
+      sel = g;
+      document.getElementById('btn1').disabled = false;
+      editing = jav ? (visitadas.filter(function(v){return v.gleba===g.gleba;})[0] || null) : null;
     };
     c.appendChild(chip);
   });
+  document.getElementById('vs').style.display = visitadas.length ? '' : 'none';
 }
 
 function renderInfoGrid(g) {
-  var items = [
-    {lbl:'Variedade', val:g.variedade},
-    {lbl:'Área', val:g.ha+' ha'},
-    {lbl:'Plantio', val:g.plantio+' · '+g.idade+' anos'},
-    {lbl:'Espaçamento', val:g.espacamento},
-    {lbl:'Fruto', val:g.fruto},
-    {lbl:'Porte / Maturação', val:g.porte+' / '+g.maturacao}
-  ];
-  document.getElementById('info-grid').innerHTML = items.map(function(i){
-    return '<div class="info-item"><div class="lbl">'+i.lbl+'</div><div class="val">'+i.val+'</div></div>';
-  }).join('');
+  document.getElementById('infogrid').innerHTML = [
+    {l:'Variedade',v:g.variedade},{l:'Área',v:g.ha+' ha'},
+    {l:'Plantio',v:g.plantio+' · '+g.idade+' anos'},{l:'Espaçamento',v:g.espacamento},
+    {l:'Fruto',v:g.fruto},{l:'Porte / Maturação',v:g.porte+' / '+g.maturacao}
+  ].map(function(i){return '<div class="info-item"><div class="lbl">'+i.l+'</div><div class="val">'+i.v+'</div></div>';}).join('');
 }
 
 function setR(btn, key, val) {
   ratings[key] = val;
-  btn.parentNode.querySelectorAll('.rb').forEach(function(b){ b.className = 'rb'; });
-  btn.className = 'rb sel-' + val;
+  btn.parentNode.querySelectorAll('.rb').forEach(function(b){b.className='rb';});
+  btn.className = 'rb ' + rc(val);
+}
+
+function fillForm(v) {
+  ratings = Object.assign({}, v.ratings);
+  fotos = v.fotos ? v.fotos.slice() : [];
+  document.getElementById('obs').value = v.obs || '';
+  document.getElementById('rec').value = v.rec || '';
+  document.querySelectorAll('.rb').forEach(function(b){
+    var oc = b.getAttribute('onclick') || '';
+    b.className = 'rb';
+    ITEMS.forEach(function(item){
+      if (ratings[item.key] && oc.indexOf("'"+item.key+"'") >= 0 && oc.indexOf("'"+ratings[item.key]+"'") >= 0) {
+        b.className = 'rb ' + rc(ratings[item.key]);
+      }
+    });
+  });
+  renderFotoWrap();
+}
+
+function resetForm() {
+  ratings = {}; fotos = []; editing = null;
+  document.querySelectorAll('.rb').forEach(function(b){b.className='rb';});
+  document.getElementById('obs').value = '';
+  document.getElementById('rec').value = '';
+  renderFotoWrap();
+  sel = null;
+  document.getElementById('btn1').disabled = true;
+}
+
+function salvar() {
+  if (!sel) return;
+  var v = {
+    gleba: sel.gleba, propriedade: sel.propriedade, variedade: sel.variedade,
+    ha: sel.ha, plantio: sel.plantio, idade: sel.idade, porte: sel.porte,
+    maturacao: sel.maturacao, ratings: Object.assign({}, ratings),
+    obs: document.getElementById('obs').value,
+    rec: document.getElementById('rec').value,
+    fotos: fotos.slice(),
+    status: status(ratings)
+  };
+  var idx = visitadas.findIndex(function(x){return x.gleba===v.gleba;});
+  if (idx >= 0) { visitadas[idx] = v; } else { visitadas.push(v); }
+  save();
+  resetForm();
+  renderSum();
+  updateBadges();
+  goStep(3);
+  toast('Gleba salva! ✓');
 }
 
 function addFotos(input) {
-  Array.from(input.files).forEach(function(file) {
+  Array.from(input.files).forEach(function(f){
     var r = new FileReader();
-    r.onload = function(e) { currentFotos.push(e.target.result); renderFotoWrap(); };
-    r.readAsDataURL(file);
+    r.onload = function(e){ fotos.push(e.target.result); renderFotoWrap(); };
+    r.readAsDataURL(f);
   });
   input.value = '';
 }
@@ -298,221 +346,135 @@ function addFotos(input) {
 function renderFotoWrap() {
   var w = document.getElementById('foto-wrap');
   w.innerHTML = '';
-  currentFotos.forEach(function(src) {
+  fotos.forEach(function(src){
     var img = document.createElement('img');
-    img.className = 'foto-thumb';
-    img.src = src;
-    img.onclick = function(){ openFotoModal(src); };
+    img.className = 'foto-thumb'; img.src = src;
+    img.onclick = function(){ openModal(src); };
     w.appendChild(img);
   });
-  w.appendChild(makeFotoBtn());
+  var a = document.createElement('div');
+  a.className = 'foto-add';
+  a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Foto';
+  a.onclick = function(){ document.getElementById('fi').click(); };
+  w.appendChild(a);
 }
 
-function openFotoModal(src) {
-  document.getElementById('foto-modal-img').src = src;
-  document.getElementById('foto-modal').classList.add('open');
+function openModal(src){
+  document.getElementById('fmimg').src = src;
+  document.getElementById('fmodal').classList.add('open');
 }
 
-function salvarGleba() {
-  var novaAvaliacao = {
-    gleba: selectedGleba.gleba,
-    propriedade: selectedGleba.propriedade,
-    variedade: selectedGleba.variedade,
-    ha: selectedGleba.ha,
-    plantio: selectedGleba.plantio,
-    idade: selectedGleba.idade,
-    porte: selectedGleba.porte,
-    maturacao: selectedGleba.maturacao,
-    ratings: Object.assign({}, ratings),
-    obs: document.getElementById('obs-gleba').value,
-    rec: document.getElementById('rec-gleba').value,
-    fotos: currentFotos.slice(),
-    status: statusGeral(ratings)
-  };
-  if (editandoGleba) {
-    var idx = visitadas.findIndex(function(v){return v.gleba===novaAvaliacao.gleba});
-    if (idx >= 0) { visitadas[idx] = novaAvaliacao; } else { visitadas.push(novaAvaliacao); }
-  } else { visitadas.push(novaAvaliacao); }
-  editandoGleba = null;
-  autoSave();
-  resetForm();
-  renderConsolidado();
-  updateVisitBadges();
-  goStep(3);
-  showToast('Gleba salva! ✓');
-}
-
-function resetForm() {
-  ratings = {};
-  currentFotos = [];
-  document.querySelectorAll('.rb').forEach(function(b){ b.className = 'rb'; });
-  document.getElementById('obs-gleba').value = '';
-  document.getElementById('rec-gleba').value = '';
-  var w = document.getElementById('foto-wrap');
-  w.innerHTML = '';
-  w.appendChild(makeFotoBtn());
-  selectedGleba = null;
-  document.getElementById('btn-prox1').disabled = true;
-}
-
-function updateVisitBadges() {
-  document.getElementById('visit-badges').innerHTML = visitadas.map(function(v){
-    return '<span class="badge '+badgeClass(v.status)+'">'+v.gleba+'</span>';
+function updateBadges() {
+  document.getElementById('vbadges').innerHTML = visitadas.map(function(v){
+    return '<span class="badge '+bc(v.status)+'">'+v.gleba+'</span>';
   }).join('');
+  document.getElementById('vlist').innerHTML = visitadas.map(function(v){
+    return '<span class="badge '+bc(v.status)+'" style="margin:3px 3px 0 0;display:inline-block">'+v.gleba+'</span>';
+  }).join('');
+  document.getElementById('vs').style.display = visitadas.length ? '' : 'none';
 }
 
-function renderConsolidado() {
-  var tHa = visitadas.reduce(function(s,v){ return s+parseFloat(v.ha||0); }, 0);
-  var crit = visitadas.filter(function(v){ return v.status==='critico'; }).length;
-  var atenc = visitadas.filter(function(v){ return v.status==='atencao'; }).length;
-  var ok = visitadas.filter(function(v){ return v.status==='ok'; }).length;
-
-  document.getElementById('metric-cards').innerHTML =
-    '<div class="metric-card"><div class="val">'+visitadas.length+'</div><div class="lbl">Glebas avaliadas</div></div>' +
-    '<div class="metric-card"><div class="val">'+tHa.toFixed(1)+'</div><div class="lbl">Hectares</div></div>' +
-    '<div class="metric-card"><div class="val" style="color:var(--red-mid)">'+crit+'</div><div class="lbl">Críticas</div></div>' +
-    '<div class="metric-card"><div class="val">'+ok+'/'+atenc+'/'+crit+'</div><div class="lbl">OK/atenção/crítico</div></div>';
-
-  document.getElementById('gleba-cards').innerHTML = visitadas.map(function(v) {
-    var badges = ITEMS.filter(function(i){ return v.ratings[i.key]; }).map(function(i){
-      var val = v.ratings[i.key];
-      var cls = val==='ok'?'badge-ok':val==='atencao'?'badge-atencao':'badge-critico';
-      var lbl = val==='ok'?i.labels[0]:val==='atencao'?i.labels[1]:i.labels[2];
-      return '<span class="mini-badge '+cls+'">'+i.label+': '+lbl+'</span>';
+function renderSum() {
+  var tHa = visitadas.reduce(function(s,v){return s+parseFloat(v.ha||0);},0);
+  var cr = visitadas.filter(function(v){return v.status==='critico';}).length;
+  var at = visitadas.filter(function(v){return v.status==='atencao';}).length;
+  var ok = visitadas.filter(function(v){return v.status==='ok';}).length;
+  document.getElementById('mcards').innerHTML =
+    '<div class="mc"><div class="val">'+visitadas.length+'</div><div class="lbl">Glebas</div></div>'+
+    '<div class="mc"><div class="val">'+tHa.toFixed(1)+'</div><div class="lbl">Hectares</div></div>'+
+    '<div class="mc"><div class="val" style="color:var(--rm)">'+cr+'</div><div class="lbl">Críticas</div></div>'+
+    '<div class="mc"><div class="val">'+ok+'/'+at+'/'+cr+'</div><div class="lbl">OK/at/cr</div></div>';
+  document.getElementById('gcards').innerHTML = visitadas.map(function(v){
+    var badges = ITEMS.filter(function(i){return v.ratings[i.key];}).map(function(i){
+      var val=v.ratings[i.key];
+      var cls=val==='ok'?'bok':val==='atencao'?'bat':'bcr';
+      var lbl=val==='ok'?i.labels[0]:val==='atencao'?i.labels[1]:i.labels[2];
+      return '<span class="mb '+cls+'">'+i.label+': '+lbl+'</span>';
     }).join('');
-    var fh = v.fotos && v.fotos.length ?
-      '<div class="foto-preview-row">'+v.fotos.map(function(src){
-        return '<img class="foto-preview-thumb" src="'+src+'">';
-      }).join('')+'</div>' : '';
-    return '<div class="gleba-card">' +
-      '<div class="gleba-card-head"><span class="gleba-card-name">'+v.gleba+'</span>' +
-      '<span class="badge '+badgeClass(v.status)+'">'+(v.status==='ok'?'OK':v.status==='atencao'?'Atenção':'Crítico')+'</span></div>' +
-      '<div class="gleba-card-sub">'+v.variedade+' · '+v.ha+' ha · '+v.idade+' anos</div>' +
-      '<div>'+badges+'</div>' +
-      (v.obs ? '<div style="font-size:12px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:.5px solid var(--border)">'+v.obs+'</div>' : '') +
-      (v.rec ? '<div style="font-size:12px;color:var(--text2);margin-top:4px"><b>Rec:</b> '+v.rec+'</div>' : '') +
-      fh + '</div>';
+    var fh = v.fotos&&v.fotos.length?'<div class="fp-row">'+v.fotos.map(function(s){return'<img class="fp-thumb" src="'+s+'">';}).join('')+'</div>':'';
+    return '<div class="gc"><div class="gc-head"><span class="gc-name">'+v.gleba+'</span><span class="badge '+bc(v.status)+'">'+bl(v.status)+'</span></div>'+
+      '<div class="gc-sub">'+v.variedade+' · '+v.ha+' ha · '+v.idade+' anos</div>'+
+      '<div>'+badges+'</div>'+
+      (v.obs?'<div style="font-size:12px;color:var(--tx2);margin-top:6px;padding-top:6px;border-top:.5px solid var(--bdr)">'+v.obs+'</div>':'')+
+      (v.rec?'<div style="font-size:12px;color:var(--tx2);margin-top:4px"><b>Rec:</b> '+v.rec+'</div>':'')+
+      fh+'</div>';
   }).join('');
-
-  document.getElementById('visited-list').innerHTML = visitadas.map(function(v){
-    return '<span class="badge '+badgeClass(v.status)+'" style="margin:3px 3px 0 0;display:inline-block">'+v.gleba+'</span>';
-  }).join('');
-  document.getElementById('visited-section').style.display = visitadas.length ? '' : 'none';
-  updateExportPreview();
+  updateExport();
 }
 
-function buildExportText() {
+function buildExport() {
   var data = new Date().toLocaleDateString('pt-BR');
-  var tHa = visitadas.reduce(function(s,v){ return s+parseFloat(v.ha||0); }, 0).toFixed(1);
-  var msg = 'Gere um relatório técnico completo de visita de consultoria agrícola. Organize por gleba, destaque itens críticos e finalize com recomendações por ordem de urgência.\n\n';
-  msg += 'FAZENDA: Mumbuca | DATA: '+data+' | TOTAL: '+tHa+' ha\n\n';
-  visitadas.forEach(function(v, i) {
+  var tHa = visitadas.reduce(function(s,v){return s+parseFloat(v.ha||0);},0).toFixed(1);
+  var msg = 'Gere um relatório técnico de visita agrícola. Destaque itens críticos e finalize com recomendações por urgência.\n\nFAZENDA: Três Barras | DATA: '+data+' | TOTAL: '+tHa+' ha\n\n';
+  visitadas.forEach(function(v,i){
     msg += '--- GLEBA '+(i+1)+': '+v.gleba+' ---\n';
     msg += 'Variedade: '+v.variedade+' | Área: '+v.ha+' ha | Plantio: '+v.plantio+' ('+v.idade+' anos) | Porte: '+v.porte+' | Maturação: '+v.maturacao+'\n';
     msg += 'Status: '+v.status.toUpperCase()+'\n';
-    ITEMS.forEach(function(item) {
+    ITEMS.forEach(function(item){
       if (v.ratings[item.key]) {
-        var val = v.ratings[item.key];
-        var lbl = val==='ok'?item.labels[0]:val==='atencao'?item.labels[1]:item.labels[2];
-        msg += item.label+': '+lbl+' | ';
+        var val=v.ratings[item.key];
+        msg += item.label+': '+(val==='ok'?item.labels[0]:val==='atencao'?item.labels[1]:item.labels[2])+' | ';
       }
     });
     msg += '\n';
     if (v.obs) msg += 'Obs: '+v.obs+'\n';
-    if (v.rec) msg += 'Recomendações: '+v.rec+'\n';
+    if (v.rec) msg += 'Rec: '+v.rec+'\n';
     msg += '\n';
   });
-  var serv = document.getElementById('obs-servicos').value;
-  var prox = document.getElementById('prox-visita').value;
-  var proxobs = document.getElementById('proxima-obs').value;
-  if (serv) msg += 'SERVIÇOS: '+serv+'\n';
-  if (prox) msg += 'PRÓXIMA VISITA: '+prox+'\n';
-  if (proxobs) msg += 'ATENÇÃO: '+proxobs;
+  var serv=document.getElementById('serv').value, pv=document.getElementById('pv').value, pa=document.getElementById('pa').value;
+  if(serv) msg+='SERVIÇOS: '+serv+'\n';
+  if(pv)   msg+='PRÓXIMA VISITA: '+pv+'\n';
+  if(pa)   msg+='ATENÇÃO: '+pa;
   return msg;
 }
 
-function updateExportPreview() {
-  if (visitadas.length) {
-    var t = buildExportText();
-    document.getElementById('export-preview').textContent = t.substring(0,600) + (t.length>600 ? '\n...' : '');
-  }
+function updateExport() {
+  if (!visitadas.length) return;
+  var t = buildExport();
+  document.getElementById('exprev').textContent = t.substring(0,600)+(t.length>600?'\n...':'');
 }
 
-function copiarTexto() {
-  var txt = buildExportText();
+function copiar() {
+  var txt = buildExport();
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(function(){ showToast('Copiado! Cole no Claude ✓'); }).catch(function(){ fallbackCopy(txt); });
-  } else { fallbackCopy(txt); }
+    navigator.clipboard.writeText(txt).then(function(){toast('Copiado! Cole no Claude ✓');}).catch(function(){fb(txt);});
+  } else { fb(txt); }
 }
 
-function fallbackCopy(txt) {
-  var ta = document.createElement('textarea');
-  ta.value = txt;
-  ta.style.cssText = 'position:fixed;opacity:0';
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try { document.execCommand('copy'); showToast('Copiado! Cole no Claude ✓'); }
-  catch(e) { showToast('Selecione o texto manualmente'); }
+function fb(txt) {
+  var ta=document.createElement('textarea'); ta.value=txt; ta.style.cssText='position:fixed;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{document.execCommand('copy');toast('Copiado! Cole no Claude ✓');}catch(e){toast('Selecione manualmente');}
   document.body.removeChild(ta);
 }
 
-function autoSave() {
-  try {
-    localStorage.setItem('mmb_v', JSON.stringify(visitadas.map(function(v){ return Object.assign({},v,{fotos:[]}); })));
-    localStorage.setItem('mmb_d', new Date().toISOString().split('T')[0]);
-  } catch(e) {}
-}
-
-function salvarVisitaLocal() { autoSave(); showToast('Visita salva ✓'); }
-
-function limparVisita() {
-  if (confirm('Iniciar nova visita? Os dados serão perdidos.')) {
-    visitadas = [];
-    localStorage.removeItem('mmb_v'); localStorage.removeItem('mmb_d');
-    resetForm();
-    document.getElementById('sel-prop').value = '';
-    document.getElementById('field-glebas').style.display = 'none';
-    document.getElementById('visited-section').style.display = 'none';
-    document.getElementById('visit-badges').innerHTML = '';
-    goStep(1);
-    showToast('Nova visita iniciada');
+function goStep(n) {
+  ['s1','s2','s3'].forEach(function(id,i){
+    document.getElementById(id).classList.toggle('on', i+1===n);
+  });
+  var subs = ['Três Barras / Mato Verde', 'Avaliação · '+(sel?sel.gleba:''), 'Resumo · '+new Date().toLocaleDateString('pt-BR')];
+  document.getElementById('hsub').textContent = subs[n-1];
+  document.getElementById('prog').style.width = (n*33.3)+'%';
+  window.scrollTo(0,0);
+  if (n===2 && sel) {
+    renderInfoGrid(sel);
+    if (editing) { fillForm(editing); }
   }
 }
 
-function adicionarGleba() { onPropChange(); goStep(1); }
-
-function goStep(n) {
-  if (n === 2 && selectedGleba) { renderInfoGrid(selectedGleba); if (editandoGleba) { preencherFormulario(editandoGleba); } }
-  [1,2,3].forEach(function(i){ document.getElementById('step'+i).classList.toggle('active', i===n); });
-  var subs = ['Fazenda Mumbuca', 'Avaliação · '+(selectedGleba?selectedGleba.gleba:''), 'Resumo · '+new Date().toLocaleDateString('pt-BR')];
-  document.getElementById('header-sub').textContent = subs[n-1];
-  document.getElementById('progress').style.width = (n*33.3)+'%';
-  window.scrollTo(0,0);
+function addGleba() {
+  var prop = document.getElementById('sp').value;
+  resetForm();
+  goStep(1);
+  if (prop) {
+    document.getElementById('sp').value = prop;
+    onProp();
+  }
 }
 
-
-function preencherFormulario(v) {
-  ratings = Object.assign({}, v.ratings);
-  currentFotos = v.fotos ? v.fotos.slice() : [];
-  document.getElementById('obs-gleba').value = v.obs || '';
-  document.getElementById('rec-gleba').value = v.rec || '';
-  document.querySelectorAll('.rb').forEach(function(b){ b.className='rb'; });
-  document.querySelectorAll('.rb').forEach(function(b){
-    var oc = b.getAttribute('onclick') || '';
-    ITEMS.forEach(function(item){
-      if(ratings[item.key] && oc.indexOf(item.key) >= 0 && oc.indexOf(ratings[item.key]) >= 0){
-        b.className = 'rb sel-' + ratings[item.key];
-      }
-    });
-  });
-  renderFotoWrap();
-}
-
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+function toast(msg) {
+  var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2200);
 }
 
 </script>
