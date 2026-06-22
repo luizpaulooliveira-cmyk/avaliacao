@@ -240,19 +240,9 @@ function save() {
 }
 
 function zerarVisita() {
-  
-  visitadas = [];
-  sel = null; ratings = {}; fotos = []; editing = null;
   localStorage.removeItem(SK);
-  document.getElementById('sp').value = '';
-  document.getElementById('gl').innerHTML = '';
-  document.getElementById('field-gl').style.display = 'none';
-  document.getElementById('vs').style.display = 'none';
-  document.getElementById('vbadges').innerHTML = '';
-  goStep(1);
-  toast('Visita zerada');
+  location.reload();
 }
-
 function bc(s) { return s==='critico'?'bcr':s==='atencao'?'bat':s==='ok'?'bok':'bne'; }
 function bl(s) { return s==='critico'?'Crítico':s==='atencao'?'Atenção':'OK'; }
 function rc(v) { return v==='ok'?'ok':v==='atencao'?'at':'cr'; }
