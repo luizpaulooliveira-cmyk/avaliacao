@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Três Barras">
-<title>Avaliação · Três Barras</title>
+<meta name="apple-mobile-web-app-title" content="Mumbuca">
+<title>Avaliação · Mumbuca</title>
 <style>
 :root{--gd:#085041;--gm:#0F6E56;--gg:#1D9E75;--gb:#E1F5EE;--ad:#633806;--am:#854F0B;--ab:#FAEEDA;--rd:#791F1F;--rm:#A32D2D;--rb:#FCEBEB;--bg:#f5f4f0;--card:#fff;--bdr:rgba(0,0,0,.1);--tx:#1a1a18;--tx2:#5a5a56;--tx3:#9a9a94;--r:12px;--rs:8px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
 
 <div class="hdr">
   <div class="hdr-row">
-    <div><h1>Avaliação Agronômica</h1><div class="hdr-sub" id="hsub">Três Barras / Mato Verde</div></div>
+    <div><h1>Avaliação Agronômica</h1><div class="hdr-sub" id="hsub">Fazenda Mumbuca</div></div>
     <div id="vbadges" style="display:flex;gap:4px;flex-wrap:wrap;max-width:55%;justify-content:flex-end"></div>
   </div>
   <div class="prog-wrap"><div class="prog" id="prog" style="width:33%"></div></div>
@@ -100,8 +100,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
       <label>Selecione a propriedade</label>
       <select id="sp" onchange="onProp()">
         <option value="">— Selecione —</option>
-        <option>Três Barras</option>
-        <option>Mato Verde</option>
+        <option>MUMBUCA</option>
       </select>
     </div>
     <div id="field-gl" style="display:none">
@@ -196,7 +195,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
 </div>
 <script>
 
-var GLEBAS = [{gleba:"C 02",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"6.8",espacamento:"3,60 x 0,60"},{gleba:"C 04",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2020",idade:"5",ha:"10.2",espacamento:"3,60 x 0,60"},{gleba:"C 05",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1996",idade:"29",ha:"2.49",espacamento:"4,00 x 0,50"},{gleba:"C 05 Rubi",propriedade:"Três Barras",variedade:"Rubi",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2006",idade:"19",ha:"2.72",espacamento:"3,65 x 0,65"},{gleba:"C 06 Terra Nova",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1999",idade:"26",ha:"4.24",espacamento:"3,65 x 0,65"},{gleba:"C 06 Terra Velha",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"1999",idade:"26",ha:"3.21",espacamento:"3,65 x 0,65"},{gleba:"C 07",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"2001",idade:"24",ha:"4.92",espacamento:"3,65 x 0,65"},{gleba:"C 08",propriedade:"Três Barras",variedade:"Catucaí",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2003",idade:"22",ha:"3.56",espacamento:"3,65 x 0,65"},{gleba:"C 09",propriedade:"Três Barras",variedade:"Catucaí",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2005",idade:"20",ha:"10.73",espacamento:"3,65 x 0,65"},{gleba:"C 14",propriedade:"Três Barras",variedade:"Acaiá",fruto:"Vermelho",porte:"Alto",maturacao:"Média",plantio:"2006",idade:"19",ha:"11.81",espacamento:"3,65 x 0,65"},{gleba:"C 15",propriedade:"Três Barras",variedade:"Catuaí",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2007",idade:"18",ha:"6.01",espacamento:"3,65 x 0,65"},{gleba:"C 16",propriedade:"Três Barras",variedade:"Catuaí / 144",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2013",idade:"12",ha:"6.35",espacamento:"3,65 x 0,60"},{gleba:"C 16 B",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2013",idade:"12",ha:"2.92",espacamento:"3,65 x 0,60"},{gleba:"C 17",propriedade:"Três Barras",variedade:"Catuaí / 99 - C15",fruto:"Vermelho",porte:"Alto",maturacao:"Tardia",plantio:"2015",idade:"10",ha:"9.5",espacamento:"3,65 x 0,60"},{gleba:"C 17 B",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2018",idade:"7",ha:"7.34",espacamento:"3,65 x 0,60"},{gleba:"C 17 A",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2023",idade:"2",ha:"1.77",espacamento:"3,65 x 0,60"},{gleba:"C 17 C",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2023",idade:"2",ha:"1.7",espacamento:"3,65 x 0,60"},{gleba:"C 18",propriedade:"Três Barras",variedade:"Catuaí / 144",fruto:"Vermelho",porte:"Baixo",maturacao:"Tardia",plantio:"2013",idade:"12",ha:"2.42",espacamento:"3,65 x 0,60"},{gleba:"C 19",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2013",idade:"12",ha:"2.32",espacamento:"3,65 x 0,60"},{gleba:"C 20",propriedade:"Três Barras",variedade:"MGS Turmalina / IPR 98",fruto:"Amarelo",porte:"Baixo",maturacao:"Média",plantio:"2023",idade:"2",ha:"6.69",espacamento:"3,65 x 0,60"},{gleba:"Pereira",propriedade:"Três Barras",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"12.33",espacamento:"3,60 x 0,60"},{gleba:"Quitéria",propriedade:"Mato Verde",variedade:"Catucaí / 2 SL",fruto:"Amarelo",porte:"Baixo",maturacao:"Precoce",plantio:"2025",idade:"0",ha:"22.1",espacamento:"3,60 x 0,60"},{gleba:"MV 07",propriedade:"Mato Verde",variedade:"Obatã Amarelo IAC 4739 / Vale Verde",fruto:"Amarelo",porte:"Baixo",maturacao:"Tardia",plantio:"2025",idade:"0",ha:"11.42",espacamento:"3,60 x 0,60"}];
+var GLEBAS = [{"gleba":"CF 01","propriedade":"MUMBUCA","variedade":"Acaiá Mumbuca","fruto":"Vermelho","porte":"Alto","maturacao":"Normal","plantio":"2000","idade":"26","ha":"9.98","espacamento":"3,60 x 0,70"},{"gleba":"CF 02","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"11.17","espacamento":"3,50 x 0,80"},{"gleba":"CF 02 A","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"5.5","espacamento":"3,50 x 0,80"},{"gleba":"CF 02 B","propriedade":"MUMBUCA","variedade":"Bourbon Amarelo - IAC J10","fruto":"Amarelo","porte":"Alto","maturacao":"Precoce","plantio":"2011","idade":"15","ha":"6.3","espacamento":"3,50 x 0,80"},{"gleba":"CF 03","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"9.36","espacamento":"3,50 x 0,60"},{"gleba":"CF 03 B","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"8.28","espacamento":"3,50 x 0,60"},{"gleba":"CF 05","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"18.28","espacamento":"3,50 x 0,60"},{"gleba":"CF 05 C","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"2.63","espacamento":"3,50 x 0,60"},{"gleba":"CF 05 C Poda","propriedade":"MUMBUCA","variedade":"Catucaí 2 SL","fruto":"Amarelo","porte":"Baixo","maturacao":"Normal","plantio":"2012","idade":"14","ha":"6.37","espacamento":"3,50 x 0,60"},{"gleba":"CF 06","propriedade":"MUMBUCA","variedade":"Mundo Novo 379-19","fruto":"Vermelho","porte":"Alto","maturacao":"Normal","plantio":"2012","idade":"14","ha":"10.72","espacamento":"3,50 x 0,80"},{"gleba":"CF 08","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 144","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2013","idade":"13","ha":"5.1","espacamento":"3,50 x 0,65"},{"gleba":"CF 09","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 99","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2016","idade":"10","ha":"6.14","espacamento":"3,50 x 0,50"},{"gleba":"CF 10","propriedade":"MUMBUCA","variedade":"Catuaí Vermelho - IAC 144","fruto":"Vermelho","porte":"Baixo","maturacao":"Tardio","plantio":"2017","idade":"9","ha":"5.44","espacamento":"3,50 x 0,50"},{"gleba":"CF 11","propriedade":"MUMBUCA","variedade":"Topázio MG 1190","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2017","idade":"9","ha":"6.52","espacamento":"3,50 x 0,50"},{"gleba":"CF 12","propriedade":"MUMBUCA","variedade":"Catuaí Amarelo - IAC 62","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2018","idade":"8","ha":"9.31","espacamento":"3,50 x 0,50"},{"gleba":"CF 13","propriedade":"MUMBUCA","variedade":"Catuaí Amarelo - IAC 62","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardio","plantio":"2019","idade":"7","ha":"1.61","espacamento":"3,50 x 0,50"}];
 var ITEMS = [
   {key:'vigor',      label:'Vigor',             labels:['Bom','Regular','Ruim']},
   {key:'triacao',    label:'Triação química',    labels:['Em dia','Parcial','Atrasada']},
@@ -217,7 +216,7 @@ var sel = null;
 var ratings = {};
 var fotos = [];
 var editing = null;
-var SK = 'avl_v';
+var SK = 'mmb_v';
 
 // Restore saved data
 try {
@@ -405,7 +404,7 @@ function renderSum() {
 function buildExport() {
   var data = new Date().toLocaleDateString('pt-BR');
   var tHa = visitadas.reduce(function(s,v){return s+parseFloat(v.ha||0);},0).toFixed(1);
-  var msg = 'Gere um relatório técnico de visita agrícola. Destaque itens críticos e finalize com recomendações por urgência.\n\nFAZENDA: Três Barras | DATA: '+data+' | TOTAL: '+tHa+' ha\n\n';
+  var msg = 'Gere um relatório técnico de visita agrícola. Destaque itens críticos e finalize com recomendações por urgência.\n\nFAZENDA: Mumbuca | DATA: '+data+' | TOTAL: '+tHa+' ha\n\n';
   visitadas.forEach(function(v,i){
     msg += '--- GLEBA '+(i+1)+': '+v.gleba+' ---\n';
     msg += 'Variedade: '+v.variedade+' | Área: '+v.ha+' ha | Plantio: '+v.plantio+' ('+v.idade+' anos) | Porte: '+v.porte+' | Maturação: '+v.maturacao+'\n';
@@ -452,7 +451,7 @@ function goStep(n) {
   ['s1','s2','s3'].forEach(function(id,i){
     document.getElementById(id).classList.toggle('on', i+1===n);
   });
-  var subs = ['Três Barras / Mato Verde', 'Avaliação · '+(sel?sel.gleba:''), 'Resumo · '+new Date().toLocaleDateString('pt-BR')];
+  var subs = ['Fazenda Mumbuca', 'Avaliação · '+(sel?sel.gleba:''), 'Resumo · '+new Date().toLocaleDateString('pt-BR')];
   document.getElementById('hsub').textContent = subs[n-1];
   document.getElementById('prog').style.width = (n*33.3)+'%';
   window.scrollTo(0,0);
