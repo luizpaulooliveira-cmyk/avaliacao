@@ -36,7 +36,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
 .rb{padding:5px 10px;font-size:12px;border-radius:6px;border:1px solid var(--bdr);background:#fafaf8;color:var(--tx2);cursor:pointer;font-family:inherit;white-space:nowrap}
 .rb.ok{background:var(--gb);border-color:var(--gm);color:var(--gd);font-weight:600}
 .rb.at{background:var(--ab);border-color:var(--am);color:var(--ad);font-weight:600}
-.rb.cr{background:var(--rb);border-color:var(--rm);color:var(--rd);font-weight:600}
+.rb.cr{background:var(--rb);border-color:var(--rm);color:var(--rd);font-weight:600}.rb.na{background:#f0f0f0;border-color:#aaa;color:#666;font-weight:600}
 .foto-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .foto-thumb{width:80px;height:80px;border-radius:var(--rs);object-fit:cover;border:1px solid var(--bdr);cursor:pointer}
 .foto-add{width:80px;height:80px;border-radius:var(--rs);border:1.5px dashed var(--gg);background:var(--gb);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--gm);font-size:11px;gap:4px;font-weight:500}
@@ -124,21 +124,21 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
   <div class="sec">
     <div class="sec-title">Avaliação agronômica</div>
     <div class="grp">Geral</div>
-    <div class="avl-row"><span class="avl-label">Vigor</span><div class="avl-btns"><button class="rb" onclick="setR(this,'vigor','ok')">Bom</button><button class="rb" onclick="setR(this,'vigor','atencao')">Regular</button><button class="rb" onclick="setR(this,'vigor','critico')">Ruim</button></div></div>
+    <div class="avl-row"><span class="avl-label">Vigor</span><div class="avl-btns"><button class="rb" onclick="setR(this,'vigor','ex')">Excelente</button><button class="rb" onclick="setR(this,'vigor','ok')">Bom</button><button class="rb" onclick="setR(this,'vigor','atencao')">Regular</button><button class="rb" onclick="setR(this,'vigor','critico')">Ruim</button></div></div>
     <div class="grp">Manejo de mato</div>
-    <div class="avl-row"><span class="avl-label">Triação química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'triacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'triacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'triacao','critico')">Atrasada</button></div></div>
-    <div class="avl-row"><span class="avl-label">Capina química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinaquim','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinaquim','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinaquim','critico')">Atrasada</button></div></div>
-    <div class="avl-row"><span class="avl-label">Capina mecânica</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinamec','ok')">Em dia</button><button class="rb" onclick="setR(this,'capinamec','atencao')">Parcial</button><button class="rb" onclick="setR(this,'capinamec','critico')">Atrasada</button></div></div>
-    <div class="avl-row"><span class="avl-label">Catação de pragas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'catacao','ok')">Em dia</button><button class="rb" onclick="setR(this,'catacao','atencao')">Parcial</button><button class="rb" onclick="setR(this,'catacao','critico')">Atrasada</button></div></div>
+    <div class="avl-row"><span class="avl-label">Triação química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'triacao','ok')">Monitorar</button><button class="rb" onclick="setR(this,'triacao','sol')">Solicitado</button><button class="rb" onclick="setR(this,'triacao','atencao')">Urgente</button><button class="rb" onclick="setR(this,'triacao','critico')">Atrasado</button></div></div>
+    <div class="avl-row"><span class="avl-label">Capina química</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinaquim','ok')">Monitorar</button><button class="rb" onclick="setR(this,'capinaquim','sol')">Solicitado</button><button class="rb" onclick="setR(this,'capinaquim','atencao')">Urgente</button><button class="rb" onclick="setR(this,'capinaquim','critico')">Atrasado</button></div></div>
+    <div class="avl-row"><span class="avl-label">Capina mecânica</span><div class="avl-btns"><button class="rb" onclick="setR(this,'capinamec','ok')">Monitorar</button><button class="rb" onclick="setR(this,'capinamec','sol')">Solicitado</button><button class="rb" onclick="setR(this,'capinamec','atencao')">Urgente</button><button class="rb" onclick="setR(this,'capinamec','critico')">Atrasado</button></div></div>
+    <div class="avl-row"><span class="avl-label">Catação de pragas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'catacao','ok')">Monitorar</button><button class="rb" onclick="setR(this,'catacao','sol')">Solicitado</button><button class="rb" onclick="setR(this,'catacao','atencao')">Urgente</button><button class="rb" onclick="setR(this,'catacao','critico')">Atrasado</button></div></div>
     <div class="grp">Pragas</div>
-    <div class="avl-row"><span class="avl-label">Broca</span><div class="avl-btns"><button class="rb" onclick="setR(this,'broca','ok')">Baixa</button><button class="rb" onclick="setR(this,'broca','atencao')">Média</button><button class="rb" onclick="setR(this,'broca','critico')">Alta</button></div></div>
-    <div class="avl-row"><span class="avl-label">Bicho mineiro</span><div class="avl-btns"><button class="rb" onclick="setR(this,'bichomineiro','ok')">Baixo</button><button class="rb" onclick="setR(this,'bichomineiro','atencao')">Médio</button><button class="rb" onclick="setR(this,'bichomineiro','critico')">Alto</button></div></div>
-    <div class="avl-row"><span class="avl-label">Mariposas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'mariposas','ok')">Baixo</button><button class="rb" onclick="setR(this,'mariposas','atencao')">Médio</button><button class="rb" onclick="setR(this,'mariposas','critico')">Alto</button></div></div>
-    <div class="avl-row"><span class="avl-label">Ácaro vermelho</span><div class="avl-btns"><button class="rb" onclick="setR(this,'acaro','ok')">Baixo</button><button class="rb" onclick="setR(this,'acaro','atencao')">Médio</button><button class="rb" onclick="setR(this,'acaro','critico')">Alto</button></div></div>
+    <div class="avl-row"><span class="avl-label">Broca</span><div class="avl-btns"><button class="rb" onclick="setR(this,'broca','na')">Sem acao</button><button class="rb" onclick="setR(this,'broca','ok')">Monitorar</button><button class="rb" onclick="setR(this,'broca','atencao')">Controlar</button><button class="rb" onclick="setR(this,'broca','critico')">Ctrl urgente</button></div></div>
+    <div class="avl-row"><span class="avl-label">Bicho mineiro</span><div class="avl-btns"><button class="rb" onclick="setR(this,'bichomineiro','na')">Sem acao</button><button class="rb" onclick="setR(this,'bichomineiro','ok')">Monitorar</button><button class="rb" onclick="setR(this,'bichomineiro','atencao')">Controlar</button><button class="rb" onclick="setR(this,'bichomineiro','critico')">Ctrl urgente</button></div></div>
+    <div class="avl-row"><span class="avl-label">Mariposas</span><div class="avl-btns"><button class="rb" onclick="setR(this,'mariposas','na')">Sem acao</button><button class="rb" onclick="setR(this,'mariposas','ok')">Monitorar</button><button class="rb" onclick="setR(this,'mariposas','atencao')">Controlar</button><button class="rb" onclick="setR(this,'mariposas','critico')">Ctrl urgente</button></div></div>
+    <div class="avl-row"><span class="avl-label">Ácaro vermelho</span><div class="avl-btns"><button class="rb" onclick="setR(this,'acaro','na')">Sem acao</button><button class="rb" onclick="setR(this,'acaro','ok')">Monitorar</button><button class="rb" onclick="setR(this,'acaro','atencao')">Controlar</button><button class="rb" onclick="setR(this,'acaro','critico')">Ctrl urgente</button></div></div>
     <div class="grp">Doenças</div>
-    <div class="avl-row"><span class="avl-label">Ferrugem</span><div class="avl-btns"><button class="rb" onclick="setR(this,'ferrugem','ok')">Baixa</button><button class="rb" onclick="setR(this,'ferrugem','atencao')">Média</button><button class="rb" onclick="setR(this,'ferrugem','critico')">Alta</button></div></div>
-    <div class="avl-row"><span class="avl-label">Cercosporiose</span><div class="avl-btns"><button class="rb" onclick="setR(this,'cercosporiose','ok')">Baixa</button><button class="rb" onclick="setR(this,'cercosporiose','atencao')">Média</button><button class="rb" onclick="setR(this,'cercosporiose','critico')">Alta</button></div></div>
-    <div class="avl-row"><span class="avl-label">Phoma</span><div class="avl-btns"><button class="rb" onclick="setR(this,'phoma','ok')">Baixa</button><button class="rb" onclick="setR(this,'phoma','atencao')">Média</button><button class="rb" onclick="setR(this,'phoma','critico')">Alta</button></div></div>
+    <div class="avl-row"><span class="avl-label">Ferrugem</span><div class="avl-btns"><button class="rb" onclick="setR(this,'ferrugem','na')">Sem acao</button><button class="rb" onclick="setR(this,'ferrugem','ok')">Monitorar</button><button class="rb" onclick="setR(this,'ferrugem','atencao')">Controlar</button><button class="rb" onclick="setR(this,'ferrugem','critico')">Ctrl urgente</button></div></div>
+    <div class="avl-row"><span class="avl-label">Cercosporiose</span><div class="avl-btns"><button class="rb" onclick="setR(this,'cercosporiose','na')">Sem acao</button><button class="rb" onclick="setR(this,'cercosporiose','ok')">Monitorar</button><button class="rb" onclick="setR(this,'cercosporiose','atencao')">Controlar</button><button class="rb" onclick="setR(this,'cercosporiose','critico')">Ctrl urgente</button></div></div>
+    <div class="avl-row"><span class="avl-label">Phoma</span><div class="avl-btns"><button class="rb" onclick="setR(this,'phoma','na')">Sem acao</button><button class="rb" onclick="setR(this,'phoma','ok')">Monitorar</button><button class="rb" onclick="setR(this,'phoma','atencao')">Controlar</button><button class="rb" onclick="setR(this,'phoma','critico')">Ctrl urgente</button></div></div>
   </div>
   <div class="sec">
     <div class="sec-title">Observações e recomendações</div>
@@ -192,18 +192,18 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,'Helvetica 
 <script>
 var GLEBAS = [{"gleba":"PV1_QD1","propriedade":"DIAMANTE","variedade":"Topázio MG 1190","fruto":"Amarelo","porte":"Baixo","maturacao":"Tardia","plantio":"2026","idade":"0","ha":"10.5","espacamento":"3,90 x 0,50"},{"gleba":"PV1_QD2","propriedade":"DIAMANTE","variedade":"Arara","fruto":"Amarelo","porte":"Baixo","maturacao":"Super Tardia","plantio":"2026","idade":"0","ha":"10.5","espacamento":"3,90 x 0,50"},{"gleba":"PV1_QD3","propriedade":"DIAMANTE","variedade":"Sarchimor IAC 125","fruto":"Vermelho","porte":"Baixo","maturacao":"Precoce","plantio":"2026","idade":"0","ha":"10.5","espacamento":"3,90 x 0,50"},{"gleba":"PV1_QD4","propriedade":"DIAMANTE","variedade":"Diversos","fruto":"Diverso","porte":"Baixo","maturacao":"Diverso","plantio":"2026","idade":"0","ha":"10.5","espacamento":"3,90 x 0,50"}];
 var ITEMS = [
-  {key:'vigor',label:'Vigor',labels:['Bom','Regular','Ruim']},
-  {key:'triacao',label:'Triação química',labels:['Em dia','Parcial','Atrasada']},
-  {key:'capinaquim',label:'Capina química',labels:['Em dia','Parcial','Atrasada']},
-  {key:'capinamec',label:'Capina mecânica',labels:['Em dia','Parcial','Atrasada']},
-  {key:'catacao',label:'Catação de pragas',labels:['Em dia','Parcial','Atrasada']},
-  {key:'broca',label:'Broca',labels:['Baixa','Média','Alta']},
-  {key:'bichomineiro',label:'Bicho mineiro',labels:['Baixo','Médio','Alto']},
-  {key:'mariposas',label:'Mariposas',labels:['Baixo','Médio','Alto']},
-  {key:'acaro',label:'Ácaro vermelho',labels:['Baixo','Médio','Alto']},
-  {key:'ferrugem',label:'Ferrugem',labels:['Baixa','Média','Alta']},
-  {key:'cercosporiose',label:'Cercosporiose',labels:['Baixa','Média','Alta']},
-  {key:'phoma',label:'Phoma',labels:['Baixa','Média','Alta']}
+  {key:'vigor',label:'Vigor',labels:['Excelente','Bom','Regular','Ruim'],extra:['ex','ok','atencao','critico']},
+  {key:'triacao',label:'Triação química',labels:['Monitorar','Solicitado','Urgente','Atrasado'],extra:['ok','sol','atencao','critico']},
+  {key:'capinaquim',label:'Capina química',labels:['Monitorar','Solicitado','Urgente','Atrasado'],extra:['ok','sol','atencao','critico']},
+  {key:'capinamec',label:'Capina mecânica',labels:['Monitorar','Solicitado','Urgente','Atrasado'],extra:['ok','sol','atencao','critico']},
+  {key:'catacao',label:'Catação de pragas',labels:['Monitorar','Solicitado','Urgente','Atrasado'],extra:['ok','sol','atencao','critico']},
+  {key:'broca',label:'Broca',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'bichomineiro',label:'Bicho mineiro',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'mariposas',label:'Mariposas',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'acaro',label:'Ácaro vermelho',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'ferrugem',label:'Ferrugem',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'cercosporiose',label:'Cercosporiose',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']},
+  {key:'phoma',label:'Phoma',labels:['Sem acao','Monitorar','Controlar','Ctrl urgente'],extra:['na','ok','atencao','critico']}
 ];
 var visitadas=[],sel=null,ratings={},fotos=[],editing=null,SK='dmt_v';
 try{var d=localStorage.getItem(SK);if(d)visitadas=JSON.parse(d);}catch(e){}
@@ -214,8 +214,8 @@ function save(){try{localStorage.setItem(SK,JSON.stringify(visitadas.map(functio
 function zerarVisita(){localStorage.removeItem(SK);location.reload();}
 function bc(s){return s==='critico'?'bcr':s==='atencao'?'bat':s==='ok'?'bok':'bne';}
 function bl(s){return s==='critico'?'Crítico':s==='atencao'?'Atenção':'OK';}
-function rc(v){return v==='ok'?'ok':v==='atencao'?'at':'cr';}
-function status(r){if(ITEMS.some(function(i){return r[i.key]==='critico';}))return'critico';if(ITEMS.some(function(i){return r[i.key]==='atencao';}))return'atencao';return'ok';}
+function rc(v){return v==='ex'||v==='ok'?'ok':v==='sol'||v==='atencao'?'at':v==='na'?'na':'cr';}
+function status(r){if(ITEMS.some(function(i){return r[i.key]==='critico';}))return'critico';if(ITEMS.some(function(i){return r[i.key]==='atencao'||r[i.key]==='sol';}))return'atencao';return'ok';}
 function onProp(){
   var prop=document.getElementById('sp').value;
   var c=document.getElementById('gl');
