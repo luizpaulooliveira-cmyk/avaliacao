@@ -420,7 +420,7 @@ function buildExport() {
     ITEMS.forEach(function(item){
       if (v.ratings[item.key]) {
         var val=v.ratings[item.key];
-        msg += item.label+': '+(val==='ok'?item.labels[0]:val==='atencao'?item.labels[1]:item.labels[2])+' | ';
+        msg += item.label+': '+getLbl(item,val)+' | ';
       }
     });
     msg += '\n';
