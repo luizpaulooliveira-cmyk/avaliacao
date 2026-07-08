@@ -408,6 +408,7 @@ function renderSum() {
   updateExport();
 }
 
+function getLbl(item,val){var e=item.extra||[];var idx=e.indexOf(val);return idx>=0?item.labels[idx]:val;}
 function buildExport() {
   var data = new Date().toLocaleDateString('pt-BR');
   var tHa = visitadas.reduce(function(s,v){return s+parseFloat(v.ha||0);},0).toFixed(1);
