@@ -393,8 +393,8 @@ function renderSum() {
   document.getElementById('gcards').innerHTML = visitadas.map(function(v){
     var badges = ITEMS.filter(function(i){return v.ratings[i.key];}).map(function(i){
       var val=v.ratings[i.key];
-      var cls=val==='ok'?'bok':val==='atencao'?'bat':'bcr';
-      var lbl=val==='ok'?i.labels[0]:val==='atencao'?i.labels[1]:i.labels[2];
+      var cls=val==='critico'?'bcr':val==='atencao'||val==='sol'?'bat':val==='na'?'bne':'bok';
+      var lbl=getLbl(i,val);
       return '<span class="mb '+cls+'">'+i.label+': '+lbl+'</span>';
     }).join('');
     var fh = v.fotos&&v.fotos.length?'<div class="fp-row">'+v.fotos.map(function(s){return'<img class="fp-thumb" src="'+s+'">';}).join('')+'</div>':'';
